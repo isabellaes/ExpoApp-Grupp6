@@ -6,7 +6,7 @@ export default function Home() {
   const image = require('../images/icon.png')
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Recept App</Text>
+      <Text style={styles.title}>Easy Recept</Text>
       <Image source={image} style={styles.logoImage}/>
       <Text style={styles.textStyle} onPress={() => console.log("Link to sign-in page")}>Sign In</Text>
       <Text style={styles.textStyle} onPress={() => console.log("Link to recept page")}>Use Without Log-In</Text>
@@ -18,7 +18,7 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '40B19E',
+    backgroundColor: '#8FDED3',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -32,13 +32,12 @@ const styles = StyleSheet.create({
     width: '80%',
     margin: 15,
     backgroundColor: 'grey',
-    alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center'
   },
   title: {
     fontSize: 50,
     margin: 30,
-    color: '#787378'
+    color: '#6A0617'
   }
 });
