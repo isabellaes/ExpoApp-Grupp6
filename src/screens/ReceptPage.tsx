@@ -48,7 +48,7 @@ export default function ReceptPage({ navigation, route }: Props) {
 
   const handleSearch = (text : any) => {
     const recepts: Recept[] = data.filter((recept) => 
-      recept.receptDescription.includes(text))
+      recept.receptName.includes(text))
     setRecept(recepts);
   }
 
