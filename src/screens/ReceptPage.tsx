@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   View,
@@ -10,6 +10,9 @@ import {
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import { data } from "../utils/mockData";
+import Input from "../Components/Input";
+import Item from "../Components/listRecept";
+import Recept from "../Interfaces/receptInterface";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Recept">;
 
@@ -18,30 +21,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   item: {
-    width: "80%",
-    height: "auto",
+    width: "93%",
     padding: 20,
     borderRadius: 12,
     margin: 5,
     backgroundColor: "#A1A6AA",
-  },
-  title: {
-    fontSize: 20,
-    color: "black",
-    margin: 5,
-  },
-  protein: {
-    fontSize: 18,
-    color: "black",
-    margin: 5,
-  },
-  image: {
-    width: "100%",
-    height: 165,
-  },
-  description: {
-    color: "black",
-    margin: 5,
   },
   homeAndLogInButton: {
     flexDirection: "row",
@@ -52,16 +36,37 @@ const styles = StyleSheet.create({
 });
 
 export default function ReceptPage({ navigation, route }: Props) {
+
+  const [SearchQuery, setSearchQuery] = useState<string>("");
+  const [recepts, setRecept] = useState<Recept[] | null>(null);
+  
+  useEffect(() =>{
+    (() => {
+      setRecept(data);
+    })()
+  }, []);
+
+  const handleSearch = (text : any) => {
+    const recepts: Recept[] = data.filter((recept) => 
+      recept.receptDescription.includes(text))
+    setRecept(recepts);
+  }
+
   return (
     <View style={styles.container}>
+        <View>
+        <Input icon="md-search" placeholder="Search" onChangeText={(text) => handleSearch(text)}/>
+      </View>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
-        {data.map((item) => (
+        {recepts?.map((item) => (
           <View style={styles.item}>
-            <Image style={styles.image} source={{ uri: item.receptImage }} />
-            <Text style={styles.title}>{item.receptName}</Text>
-            <Text style={styles.protein}>Protein: {item.protein}</Text>
-            <Text numberOfLines={1} style={styles.description}>
-              {item.receptDescription}
+            <Text>
+              <Item id={item.id}
+                receptName={item.receptName}
+                receptImage={item.receptImage} 
+                protein={item.protein} 
+                receptDescription={item.receptDescription} 
+                receptIngridients={item.receptIngridients}/>
             </Text>
             <Button
               title="Details"
