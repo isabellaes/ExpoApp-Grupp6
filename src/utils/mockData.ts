@@ -23,6 +23,7 @@ const data: Recept[] = [
     receptIngridients:
       "Dressing 1/2 dl, olivolja 2 msk, balsamvinäger, vit 2 msk, dijonsenap, 1 tsk, honung, salt, svartpeppar, Sallad 600 g,potatis(ar) 2 st, ägg, 500 g laxfilé, tinad, olivolja, 1/2 ask cocktailtomat(er), 1/2 stgurka, 1 asksalladsmix, 1 burkoliversaltsvartpeppar",
   },
+ 
 ];
 
 export { data };
