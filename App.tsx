@@ -27,12 +27,11 @@ export default function App() {
         initialRouteName="Home"
         screenOptions={{
           headerStyle: {
-            backgroundColor: "blue",
+            backgroundColor: "#B0C2D4",
           },
-          headerTintColor: "white",
+          headerTintColor: "#EEE",
           animation: "slide_from_bottom",
           animationDuration: 2000,
-          headerRight: () => <Text>Användare</Text>,
         }}
       >
         <Stack.Screen
