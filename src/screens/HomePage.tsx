@@ -8,6 +8,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#0CF7E9',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -42,4 +43,3 @@ export default function HomePage({ navigation, route }: Props) {
       <Button title="Use Without Log-In" onPress={() => navigation.navigate("Recept")}/>
     </View>
   )};
-
