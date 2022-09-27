@@ -3,9 +3,24 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import * as yup from "yup";
 import { Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
+import { mockUser } from "../Interfaces/userInterface";
+import { useRoute } from "@react-navigation/native";
 
 type Props = NativeStackScreenProps<RootStackParamList, "LoggIn">;
+
+interface Values {
+  email: string;
+  password: string;
+}
+
+function validateUser(values: Values) {
+  const user = mockUser.find(
+    (user) => user.email == values.email && user.password == values.password
+  );
+  if (user) return true;
+  else return false;
+}
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -20,15 +35,19 @@ export default function LoggInPage({ navigation, route }: Props) {
     padding: 12,
     marginBottom: 5,
   };
-  function handleFormSubmit() {
-    navigation.navigate("Recept");
+  function handleFormSubmit(values: Values) {
+    if (validateUser(values)) {
+      navigation.navigate("Recept");
+    }
   }
 
   return (
     <View>
       <Formik
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values, formikActions) => {
+          handleFormSubmit(values);
+        }}
         validationSchema={yup.object().shape({
           email: yup.string().email().required(),
           password: yup
@@ -75,7 +94,7 @@ export default function LoggInPage({ navigation, route }: Props) {
             <Button
               onPress={() => {
                 handleSubmit();
-                handleFormSubmit();
+                handleFormSubmit(values);
               }}
               title="Submit"
               color="#3740FE"
