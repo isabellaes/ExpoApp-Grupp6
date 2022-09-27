@@ -63,7 +63,7 @@ export default function ReceptPage({ navigation, route }: Props) {
       </View>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         {recepts?.map((item) => (
-          <View style={styles.item}>
+          <View style={styles.item} key={item.id}>
             <Text>
               <Item
                 id={item.id}
