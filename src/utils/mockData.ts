@@ -19,7 +19,7 @@ const data: Recept[] = [
       "https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg",
     receptName: "Salmon with green salad",
     receptDescription:
-      "1. Salad: Wash and cut the potatoes into wedges. Boil the potato wedges in a little salted water for about 10 minutes, or until they feel cooked. Ready 2. Boil the eggs so that the yolk is still a little soft, about 7-8 min from the time the water has started to boil. This varies slightly depending on the stove. Then rinse them cold, peel and cut them into slices. Done 3. Rinse and halve the tomatoes and rinse and cut the cucumber into pieces. Rinse the salad. Ready 4. Cut each salmon fillet into 4 pieces so that you get large cubes. Salt and pepper both sides. Fry the salmon cubes in oil in a hot frying pan for about 3-4 minutes on both sides. Continued after the ad Done 5. Dressing: Whisk together oil, balsamic vinegar, mustard and honey in a bowl. Season with a pinch of salt and pepper. Step 6. Assembly: Mix boiled potatoes, lettuce, tomato, olives and cucumber with the dressing. Place on a plate and top with salmon and egg.",
+      "Salad: Wash and cut the potatoes into wedges. Boil the potato wedges in a little salted water for about 10 minutes, or until they feel cooked. Ready. Boil the eggs so that the yolk is still a little soft, about 7-8 min from the time the water has started to boil. This varies slightly depending on the stove. Then rinse them cold, peel and cut them into slices. Done. Rinse and halve the tomatoes and rinse and cut the cucumber into pieces. Rinse the salad. Ready. Cut each salmon fillet into 4 pieces so that you get large cubes. Salt and pepper both sides. Fry the salmon cubes in oil in a hot frying pan for about 3-4 minutes on both sides. Continued after the ad Done. Dressing: Whisk together oil, balsamic vinegar, mustard and honey in a bowl. Season with a pinch of salt and pepper. Assembly: Mix boiled potatoes, lettuce, tomato, olives and cucumber with the dressing. Place on a plate and top with salmon and egg.",
     receptIngridients:
       "Dressing 1/2 dl, olive oil 2 tbsp, balsamic vinegar, white 2 tbsp, Dijon mustard, 1 tsp, honey, salt, black pepper, Salad 600 g, potato(s) 2 pcs, egg, 500 g salmon fillet, thawed, olive oil, 1/ 2 can cocktail tomato(s), 1/2 cucumber, 1 can salad mix, 1 can olives salt black pepper",
   },
@@ -41,7 +41,7 @@ const data: Recept[] = [
       "https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_960_720.jpg",
     receptName: "Fillet of pork",
     receptDescription:
-      "Blanda ihop ingredienserna till marinaden. Putsa fläskfilén, lägg den i marinaden, minst en timme innan. Skala och klyfta rödbetorna. Stek fläskfilén i en upphettad stekpanna för att få en fin yta. Lägg över fläskfilén i en ugnsfast form tillsammans med rödbetorna och några timjankvistar. Köttet blir allra saftigast om du tillagar det på låg temperatur i ugnen. 125 grader i vanlig ugn och 100 grader i varmluftsugn. Låt gå tills köttet har en innertemperatur på 65-68 grader. Ta ut köttet och låt det vila i aluminiumfolie cirka 10 minuter. Då går köttet klart och behåller köttet sin saftighet. Bryt av den träiga delen av sparrisen. Sjud sedan sparrisen i saltat vatten i cirka 5-8 minuter.",
+      "Mix together the ingredients for the marinade. Clean the pork fillet, put it in the marinade, at least an hour before. Peel and split the beets. Fry the pork fillet in a heated frying pan to get a nice surface. Place the pork tenderloin in an ovenproof dish along with the beetroot and a few sprigs of thyme. The meat will be juiciest if you cook it at a low temperature in the oven. 125 degrees in a normal oven and 100 degrees in a convection oven. Let go until the meat has an internal temperature of 65-68 degrees. Take the meat out and let it rest in aluminum foil for about 10 minutes. Then the meat is ready and the meat retains its juiciness. Break off the woody part of the asparagus. Then boil the asparagus in salted water for about 5-8 minutes.",
     receptIngridients:
       "550 g pork fillet 1 bunch fresh thyme 65 g salad mix (1 bag) 250 g green asparagus 8 beets, small 2 green onions Marinade for pork fillet 2 tablespoons rapeseed oil 1 tablespoon sweet chili sauce 1 tablespoon honey, liquid 1 clove of garlic 1 tablespoon balsamic vinegar 1 tbsp Japanese soy 1 tsp salt 1 tsp ground black pepper",
   },
@@ -52,7 +52,7 @@ const data: Recept[] = [
       "https://cdn.pixabay.com/photo/2016/01/15/06/57/vegetarian-1141242_960_720.jpg",
     receptName: "Veggie wok",
     receptDescription:
-      "1. Cook rice according to the instructions on the package. Clear 2. Cut the tofu into pieces. Shred the white cabbage, peel and cut the carrots into fine sticks.Clear 3. Rinse and shred the leek and rinse and cut the broccoli into florets. Continuation after the ad Clea 4. Peel and grate ginger and garlic. Rinse and shred the chili. Clear 5. Heat rapeseed oil in a large frying pan or wok and fry the tofu pieces golden brown. Add a little salt and place the tofu on a plate. Clear 6. Add the sesame oil to the pan and stir-fry all the vegetables together with the ginger, garlic and chilli. Continuation after the ad Clear 7. Add coconut milk, zest and lime juice and soy. Clear 8. Allow to boil quickly and serve immediately with freshly cooked rice.",
+      "Cook rice according to the instructions on the package. Cut the tofu into pieces. Shred the white cabbage, peel and cut the carrots into fine sticks. Rinse and shred the leek and rinse and cut the broccoli into florets. Continuation after the ad. Peel and grate ginger and garlic. Rinse and shred the chili. Heat rapeseed oil in a large frying pan or wok and fry the tofu pieces golden brown. Add a little salt and place the tofu on a plate. Add the sesame oil to the pan and stir-fry all the vegetables together with the ginger, garlic and chilli. Continuation after the ad. Add coconut milk, zest and lime juice and soy.  Allow to boil quickly and serve immediately with freshly cooked rice.",
     receptIngridients:
       "500 g ris Wok 1 paket Tofu 200 g vitkål 200 g morot 1/2 st purjolök(ar) 1 st Broccoli 1 msk ingefära 2 st vitlöksklyfta(or) 1 st chilipeppar 1 krm salt 1 msk rapsolja 2 tsk sesamolja 1 burk kokosmjölk 1 st lime 1,5 msk soja, japansk",
   },
@@ -80,7 +80,7 @@ const data: Recept[] = [
   },
   {
     id: 8,
-    protein: "Tomato",
+    protein: "tomato",
     receptImage:
       "https://cdn.pixabay.com/photo/2017/05/05/19/06/tomato-soup-2288056_960_720.jpg",
     receptName: "Tomato soup",

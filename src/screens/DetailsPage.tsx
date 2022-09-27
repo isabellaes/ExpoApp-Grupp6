@@ -10,7 +10,6 @@ import {
 import { RootStackParamList } from "../../App";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Card from "../Components/Card";
-import { data } from "../utils/mockData";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Details">;
 
@@ -18,20 +17,22 @@ export default function DetailsPage({ navigation, route }: Props) {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
-        <Card style={styles.card}>
-          {data.map((item) => (
-            <View style={styles.item}>
-              <Image style={styles.image} source={{ uri: item.receptImage }} />
-              <Text style={styles.title}>{item.receptName}</Text>
-              <Text style={styles.protein}>Protein: {item.protein}</Text>
-              <Text style={styles.description}>
-                Description: {item.receptDescription}
-              </Text>
-              <Text style={styles.ingridiens}>
-                Ingridiens: {item.receptIngridients}
-              </Text>
-            </View>
-          ))}
+        <Card>
+          <Text style={styles.id}>recipe nr.{route.params.id}</Text>
+          <Image
+            style={styles.image}
+            source={{ uri: route.params.receptImage }}
+          />
+          <Text style={styles.title}>{route.params.receptName}</Text>
+          <Text style={styles.protein}>{route.params.protein}</Text>
+          <Text style={styles.titledescription}> Description:</Text>
+          <Text style={styles.description}>
+            {route.params.receptDescription}
+          </Text>
+          <Text style={styles.titleingridens}>Ingridiens: </Text>
+          <Text style={styles.ingridiens}>
+            {route.params.receptIngridients}
+          </Text>
         </Card>
       </ScrollView>
 
@@ -44,44 +45,52 @@ export default function DetailsPage({ navigation, route }: Props) {
 }
 
 const styles = StyleSheet.create({
-  card: {
-    padding: 10,
-  },
   container: {
     flex: 1,
+  },
+  id: {
+    marginLeft: 5,
   },
   item: {
     width: "100%",
     height: "auto",
     padding: 20,
-    margin: 5,
     backgroundColor: "#A1A6AA",
   },
   title: {
     fontSize: 22,
     color: "black",
-    margin: 5,
+    marginTop: 5,
+    marginLeft: 5,
   },
   protein: {
-    fontSize: 20,
+    fontSize: 15,
     color: "black",
     margin: 5,
+    marginBottom: 10,
   },
   image: {
     width: "100%",
     height: 200,
     borderRadius: 15,
+    marginTop: 10,
+  },
+  titledescription: {
+    fontSize: 17,
   },
   description: {
     fontSize: 15,
     color: "black",
-    marginTop: 15,
     margin: 5,
+    marginBottom: 15,
+  },
+  titleingridens: {
+    fontSize: 17,
+    marginLeft: 5,
   },
   ingridiens: {
     fontSize: 15,
     color: "black",
-    marginTop: 25,
     margin: 5,
   },
   buttons: {
