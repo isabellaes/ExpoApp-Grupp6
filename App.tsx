@@ -8,11 +8,17 @@ import React from "react";
 import LoggInPage from "./src/screens/LogginPage";
 import ReceptPage from "./src/screens/ReceptPage";
 import SignUpPage from "./src/screens/signUpPage";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export type RootStackParamList = {
   Home: undefined;
-  Details: undefined;
+  Details: {
+    id: number;
+    protein: string;
+    receptImage: string;
+    receptName: string;
+    receptDescription: string;
+    receptIngridients: string;
+  };
   LoggIn: undefined;
   Recept: undefined;
   SignUp: undefined;
@@ -22,47 +28,45 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <StatusBar style="light" />
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: "#B0C2D4",
-            },
-            headerTintColor: "#EEE",
-            animation: "slide_from_bottom",
-            animationDuration: 2000,
-          }}
-        >
-          <Stack.Screen
-            name="Home"
-            component={HomePage}
-            options={{ title: "Home" }}
-          />
-          <Stack.Screen
-            name="Details"
-            component={DetailsPage}
-            options={{ title: "Details" }}
-          />
-          <Stack.Screen
-            name="LoggIn"
-            component={LoggInPage}
-            options={{ title: "LoggIn" }}
-          />
-          <Stack.Screen
-            name="Recept"
-            component={ReceptPage}
-            options={{ title: "Recept" }}
-          />
-          <Stack.Screen
-            name="SignUp"
-            component={SignUpPage}
-            options={{ title: "SignUp" }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <StatusBar style="light" />
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "#B0C2D4",
+          },
+          headerTintColor: "#EEE",
+          animation: "slide_from_bottom",
+          animationDuration: 1000,
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={HomePage}
+          options={{ title: "Hem" }}
+        />
+        <Stack.Screen
+          name="Details"
+          component={DetailsPage}
+          options={{ title: "Details" }}
+        />
+        <Stack.Screen
+          name="LoggIn"
+          component={LoggInPage}
+          options={{ title: "LoggIn" }}
+        />
+        <Stack.Screen
+          name="Recept"
+          component={ReceptPage}
+          options={{ title: "Recept" }}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUpPage}
+          options={{ title: "SignUp" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

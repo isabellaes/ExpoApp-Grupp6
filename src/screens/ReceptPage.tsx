@@ -36,41 +36,47 @@ const styles = StyleSheet.create({
 });
 
 export default function ReceptPage({ navigation, route }: Props) {
-
   const [SearchQuery, setSearchQuery] = useState<string>("");
   const [recepts, setRecept] = useState<Recept[] | null>(null);
-  
-  useEffect(() =>{
+
+  useEffect(() => {
     (() => {
       setRecept(data);
-    })()
+    })();
   }, []);
 
-  const handleSearch = (text : any) => {
-    const recepts: Recept[] = data.filter((recept) => 
-      recept.receptName.includes(text))
+  const handleSearch = (text: any) => {
+    const recepts: Recept[] = data.filter((recept) =>
+      recept.receptName.includes(text)
+    );
     setRecept(recepts);
-  }
+  };
 
   return (
     <View style={styles.container}>
-        <View>
-        <Input icon="md-search" placeholder="Search" onChangeText={(text) => handleSearch(text)}/>
+      <View>
+        <Input
+          icon="md-search"
+          placeholder="Search"
+          onChangeText={(text) => handleSearch(text)}
+        />
       </View>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         {recepts?.map((item) => (
           <View style={styles.item}>
             <Text>
-              <Item id={item.id}
+              <Item
+                id={item.id}
                 receptName={item.receptName}
-                receptImage={item.receptImage} 
-                protein={item.protein} 
-                receptDescription={item.receptDescription} 
-                receptIngridients={item.receptIngridients}/>
+                receptImage={item.receptImage}
+                protein={item.protein}
+                receptDescription={item.receptDescription}
+                receptIngridients={item.receptIngridients}
+              />
             </Text>
             <Button
               title="Details"
-              onPress={() => navigation.navigate("Details")}
+              onPress={() => navigation.navigate("Details", item)}
             />
           </View>
         ))}
