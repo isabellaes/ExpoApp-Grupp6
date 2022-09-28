@@ -36,7 +36,7 @@ const data: Recept[] = [
   },
   {
     id: 4,
-    protein: "pork",
+    protein: "meat",
     receptImage:
       "https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_960_720.jpg",
     receptName: "Fillet of pork",
@@ -47,7 +47,7 @@ const data: Recept[] = [
   },
   {
     id: 5,
-    protein: "tofu",
+    protein: "vegetarian",
     receptImage:
       "https://cdn.pixabay.com/photo/2016/01/15/06/57/vegetarian-1141242_960_720.jpg",
     receptName: "Veggie wok",
@@ -58,18 +58,18 @@ const data: Recept[] = [
   },
   {
     id: 6,
-    protein: "salad",
+    protein: "vegetarian",
     receptImage:
       "https://cdn.pixabay.com/photo/2016/11/02/16/51/broccoli-1792236_960_720.jpg",
     receptName: "Salad",
     receptDescription:
-      "Boil honey, white wine vinegar and water. Add the saffron and whisk until dissolved. Then add the oil while whisking, season with salt and pepper. Split and remove all the seeds from the pomegranate and place them in a bowl. Rinse the kale and place it in a large bowl or on a plate. Top with the pomegranate seeds and walnuts. Crumble over the feta cheese and finally pour over the saffron vinaigrette and mix around.",
+      "Boil honey, white wine vinegar and water. Add the saffron and whisk until dissolved. Then add the oil while whisking, season with salt and pepper. Split and remove all the seeds from the pomegranate and place them in a bowl. Rinse the kale and place it in a large bowl or on a plate. Top with the pomegranate seeds and walnuts. Finally pour over the saffron vinaigrette and mix around.",
     receptIngridients:
-      "200 g kale (1 bag) 1 pomegranate 150 g feta cheese 0.5 bag Chef's saffron 1 tbsp water 1 tablespoon honey 1 tablespoon white wine vinegar 1 dl rapeseed oil salt and pepper",
+      "200 g kale (1 bag) 1 pomegranate 0.5 bag Chef's saffron 1 tbsp water 1 tablespoon honey 1 tablespoon white wine vinegar 1 dl rapeseed oil salt and pepper",
   },
   {
     id: 7,
-    protein: "chicken",
+    protein: "meat",
     receptImage:
       "https://cdn.pixabay.com/photo/2019/05/21/15/21/noodle-4219235_960_720.jpg",
     receptName: "Chicken with noodles",
@@ -80,7 +80,7 @@ const data: Recept[] = [
   },
   {
     id: 8,
-    protein: "tomato",
+    protein: "vegetarian",
     receptImage:
       "https://cdn.pixabay.com/photo/2017/05/05/19/06/tomato-soup-2288056_960_720.jpg",
     receptName: "Tomato soup",
@@ -88,6 +88,39 @@ const data: Recept[] = [
       "Whisk together vinegar, oil, salt and pepper in a large bowl. eason with salt and pepper. Stir in all the vegetables, including the tomatoes, and leave to soak for a minute. Mix the vegetable mixture and dilute with water to the desired consistency. Season with salt and pepper. Serve it with a few drops of olive oil and croutons.",
     receptIngridients:
       "about 2 tablespoons of butter 1 yellow onion approx. 800-1,000 g of good tomatoes or 800-1,000 g of crushed tomatoes 1 dl water 1 dl whipping cream or 1 dl milk 1 crm ground black pepper 2 diced vegetable broth 0-1 tsp salt",
+  },
+  {
+    id: 9,
+    protein: "fish",
+    receptImage:
+      "https://eu-central-1.linodeobjects.com/tasteline/2021/06/lax-i-kramig-sas-med-soltorkad-tomat-och-spenat-foto-nurlan-mathem.jpg",
+    receptName: "Salmon in creamy sauce",
+    receptDescription:
+      "1. Cut the salmon fillet into 8 cubes. Season with salt and pepper all over. Heat some oil in a frying pan and quickly brown the salmon pieces all around so that they get a nice golden frying surface. Lift out the salmon pieces and place on a plate.  Peel and grate garlic. Saute the garlic until soft in a little new oil in the frying pan. Add cream, fish stock and white wine vinegar to the pan and let the sauce simmer for 5 minutes. Clear Strain the oil from the sun-dried tomatoes. Rinse and finely chop the green onions. Add sun-dried tomatoes, half of the green onions and spinach to the cream sauce. Dilute with water if the sauce feels too thick and simmer for 2 minutes. Season with salt and pepper. Put the salmon pieces in the sauce and let them simmer in the sauce for 2 min. Sprinkle over the rest of the scallions. Serve the salmon with rice, boiled grits or potatoes.",
+    receptIngridients:
+      "600 g laxfilé(er) 3 dl vispgrädde 100 g soltorkad tomat 100 g salladslök 65 g färsk spenat Från ditt skafferi 1/2 tsk salt 2 krm svartpeppar 1 klyfta vitlök 1 msk olivolja 1 msk fiskfond 1/2 msk vitvinsvinäger 1/2 dlvatten",
+  },
+  {
+    id: 10,
+    protein: "fish",
+    receptImage:
+      "https://eu-central-1.linodeobjects.com/tasteline/2021/12/Sesampanerad-tonfisk-foto-Johanna-akerberg-kassel-800x800.jpg",
+    receptName: "Sesame breaded tuna",
+    receptDescription:
+      " Grate the carrots coarsely, if you have time you can shred them super thin. 9 carrots Shred the pak choi and sugar snap peas. 250 g pak choi, 150 g sugar snap peas Chop the tomatoes into smaller pieces. Finely chop the herbs. Clear  Mix mayonnaise with tabasco and chili flakes in a bowl. 1.5 dl mayonnaise, 2 tsp tabasco, 1 teaspoon chili flakes Sesame breaded tuna Mix sesame seeds, curry, salt and pepper. Turn the tuna in the sesame mixtur  3/4 cup white sesame seeds, 1/2 teaspoon curry, 1 tsp salt, 1 tsp black pepper, 900 g tuna fillet Heat up a frying pan. Fry the fish for 1–2 minutes per side in rapeseed oil over high heat.",
+    receptIngridients:
+      "Salad 9 pcs carrots, preferably different colors 250 g pak choi 150 g sugar snap peas 3 pcs tomatoes 1 pot fresh coriander 1 pot Thai basil 1 dl Japanese soy, (light soy) 1.5 tbsp liquid honey 3 tablespoons rice vinegar Chilli mayonnaise 1.5 dl mayonnaise, of high quality 2 tsp Tabasco 1 tsp chili flakes Sesame breaded tuna 3/4 dl white sesame seeds 1/2 tsp Curry 1 tsp salt 1 tsp black pepper, freshly ground 900 g tuna fillet, in 4-5 pieces, choose one with a green marking in the fish counter   tablespoon rapeseed oil",
+  },
+  {
+    id: 11,
+    protein: "vegetarian",
+    receptImage:
+      "https://www.valdigtvego.se/wp-content/uploads/2018/03/so%CC%88tpotatishummus3.jpg",
+    receptName: "flat bread with filling",
+    receptDescription:
+      "Peel the sweet potato and cut it into small pieces. Place the sweet potatoes in a saucepan and cover with water. Salt the water and let the potatoes boil until soft (about 10-15 minutes). Pour off the water. Drain and rinse the chickpeas (and don't forget to use the spade! You can even freeze it).  Mix all the ingredients (except the flatbreads) and mix in a food processor or with a hand blender until you have a smooth and creamy hummus. If you use a stick blender, you need to press the garlic clove and coarsely chop the parsley before you start mixing. Dilute with more water if you want a thinner consistency.  When the mixture has cooled slightly, spread over thin bread and roll up from the short side. Cut each flatbread into five pieces. Ready to serve!",
+    receptIngridients:
+      "5 flatbreads 1 large sweet potato (approx. 450 g) 1 tetra chickpea (400 g) ½ pot parsley (including sprigs) 3/4 lemon, juice 3 tbsp olive oil (+ more for serving) 4 tbsp water 2 tbsp tahini 1 1/2 cloves of garlic 1 teaspoon cumin (+ more for serving) ½ tsp salt a pinch of cayenne pepper possibly 1 tsp agave syrup",
   },
 ];
 
