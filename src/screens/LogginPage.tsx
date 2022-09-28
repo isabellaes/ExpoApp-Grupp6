@@ -4,7 +4,7 @@ import { RootStackParamList } from "../../App";
 import * as yup from "yup";
 import { Formik } from "formik";
 import React, { useState } from "react";
-import { mockUser } from "../Interfaces/userInterface";
+import { mockUser, User } from "../Interfaces/userInterface";
 import { useRoute } from "@react-navigation/native";
 
 type Props = NativeStackScreenProps<RootStackParamList, "LoggIn">;
@@ -14,14 +14,6 @@ interface Values {
   password: string;
 }
 
-function validateUser(values: Values) {
-  const user = mockUser.find(
-    (user) => user.email == values.email && user.password == values.password
-  );
-  if (user) return true;
-  else return false;
-}
-
 const styles = StyleSheet.create({
   formContainer: {
     padding: 50,
@@ -29,6 +21,11 @@ const styles = StyleSheet.create({
 });
 
 export default function LoggInPage({ navigation, route }: Props) {
+  const [user, setUser] = useState<User | null>(null);
+
+  function changeUser(user: User) {
+    setUser(user);
+  }
   const inputStyle = {
     borderWidth: 1,
     borderColor: "#4e4e4e",
@@ -39,6 +36,15 @@ export default function LoggInPage({ navigation, route }: Props) {
     if (validateUser(values)) {
       navigation.navigate("Recept");
     }
+  }
+  function validateUser(values: Values) {
+    const user = mockUser.find(
+      (user) => user.email == values.email && user.password == values.password
+    );
+    if (user) {
+      changeUser(user);
+      return true;
+    } else return false;
   }
 
   return (
