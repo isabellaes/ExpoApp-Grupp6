@@ -2,11 +2,11 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomePage from "./src/screens/HomePage";
-import DetailsPage from "./src/screens/DetailsPage";
+import HomePage from "./src/screens/homePage";
+import DetailsPage from "./src/screens/detailsPage";
 import React from "react";
-import LoggInPage from "./src/screens/LogginPage";
-import ReceptPage from "./src/screens/ReceptPage";
+import LoggInPage from "./src/screens/logginPage";
+import ReceptPage from "./src/screens/receptPage";
 import SignUpPage from "./src/screens/signUpPage";
 
 export type RootStackParamList = {
@@ -44,7 +44,7 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomePage}
-          options={{ title: "Hem" }}
+          options={{ title: "Home" }}
         />
         <Stack.Screen
           name="Details"
