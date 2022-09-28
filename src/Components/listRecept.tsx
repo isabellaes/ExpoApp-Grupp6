@@ -1,17 +1,11 @@
 import React, { FC } from "react";
 import {
-    Button,
     View,
     Text,
     StyleSheet,
-    ScrollView,
     Image,
   } from "react-native";
 import Recept from "../Interfaces/receptInterface";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../App";
-import { data } from "../utils/mockData";
-import Input from "../Components/Input"
 
 const styles = StyleSheet.create({
     title: {
@@ -31,12 +25,15 @@ const styles = StyleSheet.create({
     description: {
       color: "black",
       margin: 8,
+    },
+    container: {
+      flex: 1
     }
   });
   
 const Item : FC<Recept> = (props) => {
     return (
-             <View>
+             <View style={styles.container}>
             <Image style={styles.image} source={{ uri: props.receptImage }} />
             <Text style={styles.title}>{props.receptName}</Text>
             <Text style={styles.protein}>{props.protein}</Text>

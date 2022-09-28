@@ -11,12 +11,8 @@ interface Props {
 const Input: FC<Props> = (props) => {
     return (
         <View style={styles.container}>
-            <View>
-                <Ionicons name={props.icon} size={22} color="#555"/>
-            </View>
-            <View>
-                <TextInput placeholderTextColor="#555" placeholder={props.placeholder} onChangeText={props.onChangeText}/>
-            </View>
+            <Ionicons name={props.icon} size={22} color="#8A8A8A"/>
+            <TextInput placeholderTextColor="#8A8A8A" placeholder={props.placeholder} onChangeText={props.onChangeText}/>
         </View>
     )
 }
@@ -27,7 +23,9 @@ const styles = StyleSheet.create({
             flexDirection: "row",
             alignItems: 'center',
             height: 50,
-            backgroundColor: "#B0C2D4"
+            backgroundColor: "#E2E4E5",
             
-        }
+
+         
+        },
     })

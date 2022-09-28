@@ -36,7 +36,7 @@ export default function App() {
           headerStyle: {
             backgroundColor: "#B0C2D4",
           },
-          headerTintColor: "#EEE",
+          headerTintColor: "#385AF0",
           animation: "slide_from_bottom",
           animationDuration: 1000,
         }}
