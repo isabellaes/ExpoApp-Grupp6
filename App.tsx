@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "./src/screens/homePage";
-import DetailsPage from "./src/screens/detailsPage";
+import DetailsPage from "./src/screens/detailPage";
 import React from "react";
 import LoggInPage from "./src/screens/logginPage";
 import ReceptPage from "./src/screens/receptPage";
