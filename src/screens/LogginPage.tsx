@@ -89,6 +89,7 @@ export default function LoggInPage({ navigation, route }: Props) {
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
               style={inputStyle}
+              secureTextEntry={true}
               value={values.password}
               placeholder="Password"
             />
