@@ -5,7 +5,6 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  Image,
 } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
@@ -13,6 +12,7 @@ import { data } from "../utils/mockData";
 import Input from "../Components/Input";
 import Item from "../Components/listRecept";
 import Recept from "../Interfaces/receptInterface";
+import { Entypo, FontAwesome } from '@expo/vector-icons';
 
 type Props = NativeStackScreenProps<RootStackParamList, "Recept">;
 
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     height: 50,
     backgroundColor: "#B0C2D4",
+    alignItems: 'center'
   },
   category: {
     flexDirection: 'row',
@@ -54,6 +55,8 @@ export default function ReceptPage({ navigation, route }: Props) {
       recept.receptName.includes(text)
     );
     setRecept(recepts);
+
+    //fuse.JS
   };
 
   const handleSortMeatRecept = () => {
@@ -119,8 +122,8 @@ export default function ReceptPage({ navigation, route }: Props) {
         ))}
       </ScrollView>
       <View style={styles.homeAndLogInButton}>
-        <Button title="Home" onPress={() => navigation.navigate("Home")} />
-        <Button title="Logg In" onPress={() => navigation.navigate("LoggIn")} />
+        <Entypo name="home" size={30} color="black" onPress={() => navigation.navigate("Home")}/>
+        <FontAwesome name="sign-in" size={30} color="black"  onPress={() => navigation.navigate("LoggIn")}/>
       </View>
     </View>
   );
