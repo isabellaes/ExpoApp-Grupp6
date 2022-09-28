@@ -4,7 +4,7 @@ import { RootStackParamList } from "../../App";
 import * as yup from "yup";
 import { Formik } from "formik";
 import React, { useState } from "react";
-import { mockUser, User } from "../Interfaces/userInterface";
+import { mockUser, User } from "../interfaces/userInterface";
 import { useRoute } from "@react-navigation/native";
 
 type Props = NativeStackScreenProps<RootStackParamList, "LoggIn">;

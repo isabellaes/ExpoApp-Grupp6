@@ -9,10 +9,16 @@ import {
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import { data } from "../utils/mockData";
+
+import Input from "../components/input";
+import Item from "../components/listRecept";
+import Recept from "../interfaces/receptInterface";
+
 import Input from "../Components/Input";
 import Item from "../Components/listRecept";
 import Recept from "../Interfaces/receptInterface";
 import { Entypo, FontAwesome } from '@expo/vector-icons';
+
 
 type Props = NativeStackScreenProps<RootStackParamList, "Recept">;
 
@@ -35,9 +41,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   category: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  }
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 });
 
 export default function ReceptPage({ navigation, route }: Props) {
@@ -60,22 +66,25 @@ export default function ReceptPage({ navigation, route }: Props) {
   };
 
   const handleSortMeatRecept = () => {
-    const recepts: Recept[] = data.filter((recept => recept.protein === "meat")
-      
+    const recepts: Recept[] = data.filter(
+      (recept) => recept.protein === "meat"
     );
     setRecept(recepts);
   };
 
   const handleSortFishRecept = () => {
-    const recepts: Recept[] = data.filter((recept => recept.protein === "fish"))
+    const recepts: Recept[] = data.filter(
+      (recept) => recept.protein === "fish"
+    );
     setRecept(recepts);
   };
 
   const handleSortVegetarian = () => {
-    const recepts: Recept[] = data.filter((recept => recept.protein === "vegetarian"))
+    const recepts: Recept[] = data.filter(
+      (recept) => recept.protein === "vegetarian"
+    );
     setRecept(recepts);
   };
-
 
   return (
     <View style={styles.container}>
@@ -86,21 +95,16 @@ export default function ReceptPage({ navigation, route }: Props) {
           onChangeText={(text) => handleSearch(text)}
         />
       </View>
-      
+
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.category}>
-          <Button color="#8A8A8A"
-                  title="Meat"
-                  onPress={handleSortMeatRecept}
-                />
-          <Button color="#8A8A8A"
-                  title="Fish"
-                  onPress={handleSortFishRecept}
-                />
-          <Button color="#8A8A8A"
-                  title="Vegetarian"
-                  onPress={handleSortVegetarian}
-                />
+          <Button color="#8A8A8A" title="Meat" onPress={handleSortMeatRecept} />
+          <Button color="#8A8A8A" title="Fish" onPress={handleSortFishRecept} />
+          <Button
+            color="#8A8A8A"
+            title="Vegetarian"
+            onPress={handleSortVegetarian}
+          />
         </View>
         {recepts?.map((item) => (
           <View style={styles.item} key={item.id}>
