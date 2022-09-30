@@ -1,4 +1,11 @@
-import { Button, View, Text, TextInput, StyleSheet } from "react-native";
+import {
+  Button,
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import * as yup from "yup";
@@ -6,6 +13,7 @@ import { Formik } from "formik";
 import React, { useState } from "react";
 import { mockUser, User } from "../interfaces/userInterface";
 import { useRoute } from "@react-navigation/native";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 type Props = NativeStackScreenProps<RootStackParamList, "LoggIn">;
 
@@ -47,9 +55,19 @@ export default function LogInScreen({ navigation, route }: Props) {
       return true;
     } else return false;
   }
+  async function changeScreenOrientationLandscape() {
+    await ScreenOrientation.lockAsync(
+      ScreenOrientation.OrientationLock.LANDSCAPE_LEFT
+    );
+  }
+  async function changeScreenOrientationPortrait() {
+    await ScreenOrientation.lockAsync(
+      ScreenOrientation.OrientationLock.PORTRAIT_UP
+    );
+  }
 
   return (
-    <View>
+    <ScrollView>
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values, formikActions) => {
@@ -110,15 +128,24 @@ export default function LogInScreen({ navigation, route }: Props) {
           </View>
         )}
       </Formik>
-
-      <Button
-        title="Offline mood"
-        onPress={() => navigation.navigate("Recept")}
-      />
-      <Button
-        title="Dont have an account yet? Sign up here!"
-        onPress={() => navigation.navigate("SignUp")}
-      />
-    </View>
+      <View>
+        <Button
+          title="Offline mood"
+          onPress={() => navigation.navigate("Recept")}
+        />
+        <Button
+          title="Dont have an account yet? Sign up here!"
+          onPress={() => navigation.navigate("SignUp")}
+        />
+        <Button
+          title="Landscape Screen"
+          onPress={() => changeScreenOrientationLandscape()}
+        ></Button>
+        <Button
+          title="Portrait Screen"
+          onPress={() => changeScreenOrientationPortrait()}
+        ></Button>
+      </View>
+    </ScrollView>
   );
 }
