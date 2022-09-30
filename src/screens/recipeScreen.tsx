@@ -3,10 +3,10 @@ import { Button, View, Text, StyleSheet, ScrollView } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import { data } from "../utils/mockData";
-import Input from "../components/input";
-import Item from "../components/listRecept";
 import Recept from "../interfaces/receptInterface";
 import { Entypo, FontAwesome } from "@expo/vector-icons";
+import Input from "../components/input";
+import Item from "../components/listRecept";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Recept">;
 //test
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ReceptPage({ navigation, route }: Props) {
+export default function RecipeScreen({ navigation, route }: Props) {
   const [SearchQuery, setSearchQuery] = useState<string>("");
   const [recepts, setRecept] = useState<Recept[] | null>(null);
 

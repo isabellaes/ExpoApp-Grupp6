@@ -13,7 +13,7 @@ import Card from "../components/card";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Details">;
 
-export default function DetailsPage({ navigation, route }: Props) {
+export default function DetailScreen({ navigation, route }: Props) {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>

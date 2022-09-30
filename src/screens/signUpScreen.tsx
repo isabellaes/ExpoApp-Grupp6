@@ -5,10 +5,10 @@ import { RootStackParamList } from "../../App";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 
-export default function SignUpPage({ navigation, route }: Props) {
+export default function SignUpScreen({ navigation, route }: Props) {
   return (
     <View>
-       <Text>SignUpPage</Text>
+      <Text>SignUpPage</Text>
       <Button title="Home" onPress={() => navigation.navigate("Home")} />
     </View>
   );

@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function LoggInPage({ navigation, route }: Props) {
+export default function LogInScreen({ navigation, route }: Props) {
   const [user, setUser] = useState<User | null>(null);
 
   function changeUser(user: User) {

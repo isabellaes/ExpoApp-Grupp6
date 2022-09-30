@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function HomePage({ navigation, route }: Props) {
+export default function HomeScreen({ navigation, route }: Props) {
   const image = require("../images/icon.png");
   return (
     <View style={styles.container}>

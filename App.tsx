@@ -3,12 +3,12 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import LoggInPage from "./src/screens/logginPage";
-import ReceptPage from "./src/screens/receptPage";
-import SignUpPage from "./src/screens/signUpPage";
-import FavoritPage from "./src/screens/favoritPage";
-import HomePage from "./src/screens/homePage";
-import DetailsPage from "./src/screens/detailPage";
+import HomeScreen from "./src/screens/homeScreen";
+import LogInScreen from "./src/screens/loginScreen";
+import RecipeScreen from "./src/screens/recipeScreen";
+import SignUpScreen from "./src/screens/signUpScreen";
+import FavoritScreen from "./src/screens/favoritScreen";
+import DetailScreen from "./src/screens/detailScreen";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -45,32 +45,32 @@ export default function App() {
       >
         <Stack.Screen
           name="Home"
-          component={HomePage}
+          component={HomeScreen}
           options={{ title: "Home" }}
         />
         <Stack.Screen
           name="Details"
-          component={DetailsPage}
+          component={DetailScreen}
           options={{ title: "Details" }}
         />
         <Stack.Screen
           name="LoggIn"
-          component={LoggInPage}
+          component={LogInScreen}
           options={{ title: "LoggIn" }}
         />
         <Stack.Screen
           name="Recept"
-          component={ReceptPage}
+          component={RecipeScreen}
           options={{ title: "Recept" }}
         />
         <Stack.Screen
           name="SignUp"
-          component={SignUpPage}
+          component={SignUpScreen}
           options={{ title: "SignUp" }}
         />
         <Stack.Screen
           name="Favorit"
-          component={FavoritPage}
+          component={FavoritScreen}
           options={{ title: "Favorit" }}
         />
       </Stack.Navigator>
