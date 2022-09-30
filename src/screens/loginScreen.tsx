@@ -35,17 +35,20 @@ export default function LogInScreen({ navigation, route }: Props) {
     marginBottom: 5,
   };
   function validateUser(values: Values) {
-    const user = mockUser.find(
+    const user = mockUser?.find(
       (user) => user.email == values.email && user.password == values.password
     );
-    if (user) {
+    if (user != undefined) {
       user.loggedIn = true;
+      console.log(user.loggedIn);
       return true;
     } else return false;
   }
   function handleFormSubmit(values: Values) {
     if (validateUser(values)) {
       navigation.navigate("Recept");
+    } else {
+      navigation.navigate("SignUp");
     }
   }
 
