@@ -6,7 +6,7 @@ import HomePage from "./src/screens/homePage";
 import DetailsPage from "./src/screens/detailPage";
 import React from "react";
 import LoggInPage from "./src/screens/logginPage";
-import ReceptPage from "./src/screens/receptPage";
+import ReceptPage from "./src/screens/ReceptPage";
 import SignUpPage from "./src/screens/signUpPage";
 import FavoritPage from "./src/screens/favoritPage";
 
