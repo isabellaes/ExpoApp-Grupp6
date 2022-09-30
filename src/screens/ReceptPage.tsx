@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { Button, View, Text, StyleSheet, ScrollView } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import { data } from "../utils/mockData";
 import Input from "../components/input";
 import Item from "../components/listRecept";
 import Recept from "../interfaces/receptInterface";
-import { Entypo, FontAwesome } from '@expo/vector-icons';
+import { Entypo, FontAwesome } from "@expo/vector-icons";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Recept">;
-
+//test
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -32,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     height: 50,
     backgroundColor: "#B0C2D4",
-    alignItems: 'center'
+    alignItems: "center",
   },
   category: {
     flexDirection: "row",
@@ -118,8 +112,18 @@ export default function ReceptPage({ navigation, route }: Props) {
         ))}
       </ScrollView>
       <View style={styles.homeAndLogInButton}>
-        <Entypo name="home" size={30} color="black" onPress={() => navigation.navigate("Home")}/>
-        <FontAwesome name="sign-in" size={30} color="black"  onPress={() => navigation.navigate("LoggIn")}/>
+        <Entypo
+          name="home"
+          size={30}
+          color="black"
+          onPress={() => navigation.navigate("Home")}
+        />
+        <FontAwesome
+          name="sign-in"
+          size={30}
+          color="black"
+          onPress={() => navigation.navigate("LoggIn")}
+        />
       </View>
     </View>
   );
