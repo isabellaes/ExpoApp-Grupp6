@@ -6,10 +6,10 @@ import { Formik } from "formik";
 import React, { useState } from "react";
 import { mockUser, User } from "../interfaces/userInterface";
 import { useRoute } from "@react-navigation/native";
+import { useUserContext } from "../context/userContext";
 
 type Props = NativeStackScreenProps<RootStackParamList, "LoggIn">;
 
-//test
 interface Values {
   email: string;
   password: string;
@@ -21,12 +21,16 @@ const styles = StyleSheet.create({
   },
 });
 
+const context = useUserContext();
+
 export default function LogInScreen({ navigation, route }: Props) {
   const [user, setUser] = useState<User | null>(null);
 
   function changeUser(user: User) {
     setUser(user);
+    context.setLoggedInUser(user);
   }
+
   const inputStyle = {
     borderWidth: 1,
     borderColor: "#4e4e4e",
