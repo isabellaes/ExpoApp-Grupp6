@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import { RootStackParamList } from "../../App";
 import * as Speech from "expo-speech";
+import { mockUser } from "../interfaces/userInterface";
+import Item from "../components/listRecipeComponent";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Favorit">;
 
@@ -18,12 +20,31 @@ export default function FavoritScreen({ navigation, route }: Props) {
     const thingToSay = "Welcome, to your side, Eva-Li";
     Speech.speak(thingToSay);
   };
+  const loggedInUser = mockUser.find((user) => user.loggedIn === true);
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.speak}>
           <Button title="Welcome message 🗯 Press hear! 👈" onPress={speak} />
         </View>
+        {loggedInUser?.favoritRecipe.map((item) => (
+          <View>
+            <Text>
+              <Item
+                id={item.id}
+                receptName={item.receptName}
+                receptImage={item.receptImage}
+                protein={item.protein}
+                receptDescription={item.receptDescription}
+                receptIngridients={item.receptIngridients}
+              />
+            </Text>
+            <Button
+              title="Details"
+              onPress={() => navigation.navigate("Details", item)}
+            />
+          </View>
+        ))}
       </ScrollView>
       <View style={styles.buttons}>
         <Button title="Recept" onPress={() => navigation.navigate("Recept")} />
