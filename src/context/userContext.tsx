@@ -1,9 +1,14 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { User } from "../interfaces/userInterface";
+import { mockUser, User } from "../interfaces/userInterface";
 
 interface ContextValue {
   setLoggedInUser: (user: User) => void;
   getLoggedInUser: () => void;
+  validateUser: (values: Values) => boolean;
+}
+interface Values {
+  email: string;
+  password: string;
 }
 
 const UserContext = createContext<ContextValue>({
@@ -13,6 +18,9 @@ const UserContext = createContext<ContextValue>({
   getLoggedInUser: () => {
     console.warn("UserProvider not found");
   },
+  validateUser: () => {
+    return false;
+  },
 });
 
 interface Props {
@@ -21,7 +29,19 @@ interface Props {
 
 function UserProvider({ children }: Props) {
   const [user, setUser] = useState<User | null>(null);
-
+  function changeUser(user: User) {
+    //setUser(user);
+    setUser(user);
+  }
+  function validateUser(values: Values) {
+    const user = mockUser.find(
+      (user) => user.email == values.email && user.password == values.password
+    );
+    if (user) {
+      changeUser(user);
+      return true;
+    } else return false;
+  }
   const setLoggedInUser = (loggedInUser: User) => {
     setUser(loggedInUser);
   };
@@ -34,6 +54,7 @@ function UserProvider({ children }: Props) {
       value={{
         setLoggedInUser,
         getLoggedInUser,
+        validateUser,
       }}
     >
       {children}

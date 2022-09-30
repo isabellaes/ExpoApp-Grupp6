@@ -10,26 +10,20 @@ import { useUserContext } from "../context/userContext";
 
 type Props = NativeStackScreenProps<RootStackParamList, "LoggIn">;
 
-interface Values {
-  email: string;
-  password: string;
-}
-
 const styles = StyleSheet.create({
   formContainer: {
     padding: 50,
   },
 });
+interface Values {
+  email: string;
+  password: string;
+}
 
 const context = useUserContext();
 
 export default function LogInScreen({ navigation, route }: Props) {
-  const [user, setUser] = useState<User | null>(null);
-
-  function changeUser(user: User) {
-    setUser(user);
-    context.setLoggedInUser(user);
-  }
+  //const [user, setUser] = useState<User | null>(null);
 
   const inputStyle = {
     borderWidth: 1,
@@ -38,18 +32,9 @@ export default function LogInScreen({ navigation, route }: Props) {
     marginBottom: 5,
   };
   function handleFormSubmit(values: Values) {
-    if (validateUser(values)) {
+    if (context.validateUser(values)) {
       navigation.navigate("Recept");
     }
-  }
-  function validateUser(values: Values) {
-    const user = mockUser.find(
-      (user) => user.email == values.email && user.password == values.password
-    );
-    if (user) {
-      changeUser(user);
-      return true;
-    } else return false;
   }
 
   return (
