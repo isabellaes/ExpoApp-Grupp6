@@ -17,7 +17,9 @@ const loggedInUser = mockUser.find((user) => user.loggedIn === true);
 
 export default function DetailScreen({ navigation, route }: Props) {
   function addRecipe() {
-    loggedInUser?.favoritRecipe.push(route.params);
+   const addUserFavoriteRecepie = loggedInUser?.favoritRecipe.push(route.params);
+  
+   return(addUserFavoriteRecepie)
   }
   return (
     <View style={styles.container}>

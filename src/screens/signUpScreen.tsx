@@ -5,13 +5,16 @@ import { RootStackParamList } from "../../App";
 import { Formik} from "formik";
 import * as Yup from 'yup';
 import { mockUser } from "../interfaces/userInterface";
+import Recept from "../interfaces/receptInterface";
 
 
 
 type User = {
   id: number,
   email: string,
-  password: string
+  password: string,
+  loggedIn: boolean;
+  favoritRecipe: Recept[];
 }
 
 const validationSchema = Yup.object({
@@ -59,7 +62,7 @@ function handleFormSubmit(values: User) {
     <View>
       
        <Formik
-      initialValues={{ id , email: '', password: '', confirmPassword: ''}}
+      initialValues={{ id , email: '', password: '', confirmPassword: '', loggedIn: false , favoritRecipe:[]}}
        onSubmit={(values) => {
           handleFormSubmit(values);
         }}

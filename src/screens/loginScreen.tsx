@@ -12,7 +12,6 @@ import * as yup from "yup";
 import { Formik } from "formik";
 import React, { useState } from "react";
 import { mockUser } from "../interfaces/userInterface";
-import { useRoute } from "@react-navigation/native";
 import * as ScreenOrientation from "expo-screen-orientation";
 
 type Props = NativeStackScreenProps<RootStackParamList, "LoggIn">;
