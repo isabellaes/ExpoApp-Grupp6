@@ -26,7 +26,7 @@
     "react-native-web": "~0.18.7",
     "react-navigation": "^4.4.4",
 
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
 
     "expo-speech": "~10.3.0"
 

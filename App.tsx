@@ -2,13 +2,13 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomePage from "./src/screens/homePage";
-import DetailsPage from "./src/screens/detailPage";
 import React from "react";
 import LoggInPage from "./src/screens/logginPage";
-import ReceptPage from "./src/screens/ReceptPage";
+import ReceptPage from "./src/screens/receptPage";
 import SignUpPage from "./src/screens/signUpPage";
 import FavoritPage from "./src/screens/favoritPage";
+import HomePage from "./src/screens/homePage";
+import DetailsPage from "./src/screens/detailPage";
 
 export type RootStackParamList = {
   Home: undefined;
