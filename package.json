@@ -25,11 +25,9 @@
     "react-native-screens": "~3.15.0",
     "react-native-web": "~0.18.7",
     "react-navigation": "^4.4.4",
-
     "yup": "^0.32.11",
-
-    "expo-speech": "~10.3.0"
-
+    "expo-speech": "~10.3.0",
+    "expo-splash-screen": "~0.16.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
