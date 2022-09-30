@@ -8,6 +8,7 @@ import React from "react";
 import LoggInPage from "./src/screens/logginPage";
 import ReceptPage from "./src/screens/receptPage";
 import SignUpPage from "./src/screens/signUpPage";
+import FavoritPage from "./src/screens/favoritPage";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -22,6 +23,7 @@ export type RootStackParamList = {
   LoggIn: undefined;
   Recept: undefined;
   SignUp: undefined;
+  Favorit: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -65,6 +67,11 @@ export default function App() {
           name="SignUp"
           component={SignUpPage}
           options={{ title: "SignUp" }}
+        />
+        <Stack.Screen
+          name="Favorit"
+          component={FavoritPage}
+          options={{ title: "Favorit" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
