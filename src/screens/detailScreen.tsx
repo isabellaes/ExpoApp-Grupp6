@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { RootStackParamList } from "../../App";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import Card from "../components/card";
+import Card from "../components/cardComponent";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Details">;
 

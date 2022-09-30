@@ -5,8 +5,8 @@ import { RootStackParamList } from "../../App";
 import { data } from "../utils/mockData";
 import Recept from "../interfaces/receptInterface";
 import { Entypo, FontAwesome } from "@expo/vector-icons";
-import Input from "../components/input";
-import Item from "../components/listRecept";
+import Input from "../components/inputComponent";
+import Item from "../components/listRecipeComponent";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Recept">;
 //test
