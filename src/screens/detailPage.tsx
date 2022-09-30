@@ -23,7 +23,16 @@ export default function DetailsPage({ navigation, route }: Props) {
             style={styles.image}
             source={{ uri: route.params.receptImage }}
           />
-          <Text style={styles.title}>{route.params.receptName}</Text>
+          <Text style={styles.title}>
+            {route.params.receptName} 👉
+            <View>
+              <Button
+                title="Add to favorit"
+                onPress={() => navigation.navigate("Favorit")}
+              ></Button>
+            </View>
+          </Text>
+
           <Text style={styles.protein}>{route.params.protein}</Text>
           <Text style={styles.titledescription}> Description:</Text>
           <Text style={styles.description}>
@@ -37,8 +46,12 @@ export default function DetailsPage({ navigation, route }: Props) {
       </ScrollView>
 
       <View style={styles.buttons}>
-        <Button title="Recept" onPress={() => navigation.navigate("Recept")} />
         <Button title="Home" onPress={() => navigation.navigate("Home")} />
+
+        <Button
+          title="Go to favorits"
+          onPress={() => navigation.navigate("Favorit")}
+        />
       </View>
     </View>
   );
@@ -60,7 +73,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     color: "black",
-    marginTop: 5,
+
     marginLeft: 5,
   },
   protein: {
@@ -100,5 +113,3 @@ const styles = StyleSheet.create({
     backgroundColor: "#B0C2D4",
   },
 });
-
-//
