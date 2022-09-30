@@ -11,7 +11,7 @@ import { RootStackParamList } from "../../App";
 import * as yup from "yup";
 import { Formik } from "formik";
 import React, { useState } from "react";
-import { mockUser, User } from "../interfaces/userInterface";
+import { mockUser } from "../interfaces/userInterface";
 import { useRoute } from "@react-navigation/native";
 import * as ScreenOrientation from "expo-screen-orientation";
 
@@ -28,8 +28,6 @@ interface Values {
 }
 
 export default function LogInScreen({ navigation, route }: Props) {
-  //const [user, setUser] = useState<User | null>(null);
-
   const inputStyle = {
     borderWidth: 1,
     borderColor: "#4e4e4e",

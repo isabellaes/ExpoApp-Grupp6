@@ -11,13 +11,11 @@ import { RootStackParamList } from "../../App";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Card from "../components/cardComponent";
 import { mockUser } from "../interfaces/userInterface";
-import { data } from "../utils/mockData";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Details">;
 const loggedInUser = mockUser.find((user) => user.loggedIn === true);
 
 export default function DetailScreen({ navigation, route }: Props) {
-  const recipe = data.find((recipe) => recipe.id == route.params.id);
   function addRecipe() {
     loggedInUser?.favoritRecipe.push(route.params);
   }
