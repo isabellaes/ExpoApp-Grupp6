@@ -9,7 +9,7 @@ import {
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import * as yup from "yup";
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { mockUser } from "../interfaces/userInterface";
 import * as ScreenOrientation from "expo-screen-orientation";
@@ -44,10 +44,9 @@ export default function LogInScreen({ navigation, route }: Props) {
     } else return false;
   }
   function handleFormSubmit(values: Values) {
+    // let error = values.email
     if (validateUser(values)) {
-      navigation.navigate("Recept");
-    } else {
-      navigation.navigate("SignUp");
+     return navigation.navigate("Recept");
     }
   }
 
