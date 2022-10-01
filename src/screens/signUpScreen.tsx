@@ -5,6 +5,8 @@ import { RootStackParamList } from "../../App";
 import { Formik} from "formik";
 import * as Yup from 'yup';
 import { mockUser } from "../interfaces/userInterface";
+import LogInScreen from "./loginScreen";
+import { and } from "react-native-reanimated";
 
 
 
@@ -30,7 +32,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 
 export default function SignUpScreen({ navigation }: Props) {
 
-  let id = Math.random();
+let id = Math.random();
 
 const [users, setUsers] = useState<User[]>();
 
@@ -45,13 +47,28 @@ const user = users?.find((user) => user.email === values.email);
 if(user)return true
 return false
 }
+function validUserToSignUp(values: User){
+if (!checkForOldUsers(values) && values.email.trim() && values.password.trim()){
+  console.log('singup user true')
+  return true;
+}else {
+  console.log('signup user false')}
+    return false
+    
+}
+
 
 function handleFormSubmit(values: User) {
-    if (checkForOldUsers(values)) {
-      return false
+    if(validUserToSignUp(values) === true)
+    {
+      console.log('Adding new user')
+      mockUser.push(values)
     }
-    mockUser.push(values)
-    navigation.navigate("LoggIn")
+    else{
+      const userAlreadyExists = <Text>User Already Exists</Text>
+      return userAlreadyExists;
+    }
+    
   }
 
 
@@ -117,7 +134,9 @@ function handleFormSubmit(values: User) {
               </Text>
             )}
     
-            <Button onPress={() => { handleFormSubmit(values); }} title="Submit"
+            <Button onPress={() => { handleSubmit()
+            ,handleFormSubmit(values);
+           }} title="Submit"
             />
             
             <Button onPress={() => navigation.navigate("Home")} title="Cancel"/>
