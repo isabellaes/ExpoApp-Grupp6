@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useCallback, useEffect} from "react";
 import {
   View,
   Image,
@@ -6,14 +6,45 @@ import {
   Text,
   Button,
   ScrollView,
+  Pressable
 } from "react-native";
 import { RootStackParamList } from "../../App";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Card from "../components/cardComponent";
+import { Ionicons } from "@expo/vector-icons";
+import * as Haptics from 'expo-haptics';
+import { Audio } from 'expo-av';
 
 type Props = NativeStackScreenProps<RootStackParamList, "Details">;
+let src = require('../audio/alert.wav');
 
 export default function DetailScreen({ navigation, route }: Props) {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
+  const [currentSound, setSound] = useState<Audio.Sound|null>(null);
+ 
+  const playSound = React.useCallback(async () => {
+    const { sound } = await Audio.Sound.createAsync(src);
+    setSound(sound);
+    await sound.playAsync();
+  }, []);
+  
+  const handleToggleFavorite = useCallback(async () => {
+     setIsFavorite(val => !val);
+
+    if (isEnabled) {
+      if(!isFavorite) {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        playSound();
+      }
+    }
+  }, [isEnabled, isFavorite, playSound]);
+
+  useEffect(() => {
+    currentSound ? () => {currentSound.unloadAsync();} : undefined;
+  }, [currentSound]);
+
+  
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -23,16 +54,13 @@ export default function DetailScreen({ navigation, route }: Props) {
             style={styles.image}
             source={{ uri: route.params.receptImage }}
           />
-          <Text style={styles.title}>
-            {route.params.receptName} 👉
-            <View>
-              <Button
-                title="Add to favorit"
-                onPress={() => navigation.navigate("Favorit")}
-              ></Button>
-            </View>
-          </Text>
-
+          <Text style={styles.title}>{route.params.receptName}</Text>
+              <Pressable onPress={handleToggleFavorite}>
+                <Ionicons
+                name={isFavorite ? 'heart' : 'heart-outline'}
+                size={35}
+                />
+              </Pressable>
           <Text style={styles.protein}>{route.params.protein}</Text>
           <Text style={styles.titledescription}> Description:</Text>
           <Text style={styles.description}>
