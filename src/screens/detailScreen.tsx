@@ -19,7 +19,7 @@ export default function DetailScreen({ navigation, route }: Props) {
   function addRecipe() {
    const addUserFavoriteRecepie = loggedInUser?.favoritRecipe.push(route.params);
   
-   return(addUserFavoriteRecepie)
+   return addUserFavoriteRecepie
   }
   return (
     <View style={styles.container}>
