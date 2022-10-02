@@ -29,7 +29,7 @@ export default function DetailScreen({ navigation, route }: Props) {
   
   function addRecipe() {
    const addUserFavoriteRecepie = loggedInUser?.favoritRecipe.push(route.params);
-  
+
    return addUserFavoriteRecepie;
   }
  
@@ -67,10 +67,11 @@ export default function DetailScreen({ navigation, route }: Props) {
           />
           
           <Text style={styles.title}>{route.params.recipeName}</Text>
-              <Pressable onPress={handleToggleFavorite}>
+              <Pressable onPress={handleToggleFavorite} style={styles.favoriteButton}>
                 <Ionicons
                 name={isFavorite ? 'heart' : 'heart-outline'}
                 size={35}
+                
                 />
               </Pressable>
           <Text style={styles.protein}>{route.params.protein}</Text>
@@ -152,4 +153,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#B0C2D4",
   },
+  favoriteButton: {
+    width: 35
+  }
 });
