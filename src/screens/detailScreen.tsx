@@ -28,9 +28,11 @@ export default function DetailScreen({ navigation, route }: Props) {
   const loggedInUser = mockUser.find((user) => user.loggedIn === true);
   
   function addRecipe() {
-   const addUserFavoriteRecepie = loggedInUser?.favoritRecipe.push(route.params);
+   loggedInUser?.favoritRecipe.push(route.params);
+  }
 
-   return addUserFavoriteRecepie;
+  function removeRecipe () {
+    return loggedInUser?.favoritRecipe.splice(0,1);
   }
  
   const playSound = React.useCallback(async () => {
@@ -40,6 +42,7 @@ export default function DetailScreen({ navigation, route }: Props) {
   }, []);
   
   const handleToggleFavorite = useCallback(async () => {
+    
      setIsFavorite(val => !val);
 
     if (isEnabled) {
@@ -47,9 +50,11 @@ export default function DetailScreen({ navigation, route }: Props) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         playSound();
         addRecipe();
-      }
-    }
-  }, [addRecipe, isEnabled, isFavorite, playSound]);
+      } else{
+        removeRecipe();
+      } 
+    } 
+  }, [removeRecipe, addRecipe, isEnabled, isFavorite, playSound]);
 
   useEffect(() => {
     currentSound ? () => {currentSound.unloadAsync();} : undefined;

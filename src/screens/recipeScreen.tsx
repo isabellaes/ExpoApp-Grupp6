@@ -45,10 +45,15 @@ export default function RecipeScreen({ navigation, route }: Props) {
   }, []);
 
   const handleSearch = (text: any) => {
-    const recipes: Recipe[] = data.filter((recipe) =>
-      recipe.recipeName.includes(text)
-    );
+    if(text) {
+      const recipes:Recipe[] = data.filter((recipe) => {
+      const itemData = recipe.recipeName ? recipe.recipeName.toUpperCase() : ''.toUpperCase();
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
     setRecipe(recipes);
+    }
+    else setRecipe(data);
   };
 
   const handleSortMeatRecipe = () => {
