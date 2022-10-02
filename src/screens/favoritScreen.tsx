@@ -12,12 +12,13 @@ import { RootStackParamList } from "../../App";
 import * as Speech from "expo-speech";
 import { mockUser } from "../interfaces/userInterface";
 import Item from "../components/listRecipeComponent";
+import Card from "../components/cardComponent";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Favorit">;
 
 export default function FavoritScreen({ navigation, route }: Props) {
   const speak = () => {
-    const thingToSay = "Welcome, to your side, Eva-Li";
+    const thingToSay = "Haj, and welcome to your side";
     Speech.speak(thingToSay);
   };
   const loggedInUser = mockUser.find((user) => user.loggedIn === true);
@@ -25,26 +26,24 @@ export default function FavoritScreen({ navigation, route }: Props) {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.speak}>
-          <Button title="Welcome message 🗯 Press hear! 👈" onPress={speak} />
+          <Button title="Welcome message 🗯 Press hear!" onPress={speak} />
         </View>
-        {loggedInUser?.favoritRecipe.map((item) => (
-          <View>
-            <Text>
-              <Item
-                id={item.id}
-                receptName={item.receptName}
-                receptImage={item.receptImage}
-                protein={item.protein}
-                receptDescription={item.receptDescription}
-                receptIngridients={item.receptIngridients}
-              />
-            </Text>
-            <Button
-              title="Details"
-              onPress={() => navigation.navigate("Details", item)}
-            />
-          </View>
-        ))}
+        <Card>
+          {loggedInUser?.favoritRecipe.map((item) => (
+            <View style={styles.containerInfo}>
+              <Text onPress={() => navigation.navigate("Details", item)}>
+                <Item
+                  id={item.id}
+                  receptName={item.receptName}
+                  receptImage={item.receptImage}
+                  protein={item.protein}
+                  receptDescription={item.receptDescription}
+                  receptIngridients={item.receptIngridients}
+                />
+              </Text>
+            </View>
+          ))}
+        </Card>
       </ScrollView>
       <View style={styles.buttons}>
         <Button title="Recept" onPress={() => navigation.navigate("Recept")} />
@@ -60,55 +59,15 @@ const styles = StyleSheet.create({
   },
   speak: {
     marginTop: 10,
-    backgroundColor: "lightgrey",
+    backgroundColor: "#A1A6AA",
     padding: 7,
+    paddingLeft: 40,
+    paddingRight: 40,
     borderRadius: 15,
   },
-  //   id: {
-  //     marginLeft: 5,
-  //   },
-  //   item: {
-  //     width: "100%",
-  //     height: "auto",
-  //     padding: 20,
-  //     backgroundColor: "#A1A6AA",
-  //   },
-  //   title: {
-  //     fontSize: 22,
-  //     color: "black",
-  //     marginTop: 5,
-  //     marginLeft: 5,
-  //   },
-  //   protein: {
-  //     fontSize: 15,
-  //     color: "black",
-  //     margin: 5,
-  //     marginBottom: 10,
-  //   },
-  //   image: {
-  //     width: "100%",
-  //     height: 200,
-  //     borderRadius: 15,
-  //     marginTop: 10,
-  //   },
-  //   titledescription: {
-  //     fontSize: 17,
-  //   },
-  //   description: {
-  //     fontSize: 15,
-  //     color: "black",
-  //     margin: 5,
-  //     marginBottom: 15,
-  //   },
-  //   titleingridens: {
-  //     fontSize: 17,
-  //     marginLeft: 5,
-  //   },
-  //   ingridiens: {
-  //     fontSize: 15,
-  //     color: "black",
-  //     margin: 5,
-  //   },
+  containerInfo: {
+    padding: 10,
+  },
   buttons: {
     flexDirection: "row",
     justifyContent: "space-around",

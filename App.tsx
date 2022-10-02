@@ -40,7 +40,7 @@ export default function App() {
           },
           headerTintColor: "#385AF0",
           animation: "slide_from_bottom",
-          animationDuration: 1000,
+          animationDuration: 700,
         }}
       >
         <Stack.Screen
