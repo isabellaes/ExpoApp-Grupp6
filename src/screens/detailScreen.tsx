@@ -63,10 +63,10 @@ export default function DetailScreen({ navigation, route }: Props) {
           <Text style={styles.id}>recipe nr.{route.params.id}</Text>
           <Image
             style={styles.image}
-            source={{ uri: route.params.receptImage }}
+            source={{ uri: route.params.recipeImage }}
           />
           
-          <Text style={styles.title}>{route.params.receptName}</Text>
+          <Text style={styles.title}>{route.params.recipeName}</Text>
               <Pressable onPress={handleToggleFavorite}>
                 <Ionicons
                 name={isFavorite ? 'heart' : 'heart-outline'}
@@ -76,11 +76,11 @@ export default function DetailScreen({ navigation, route }: Props) {
           <Text style={styles.protein}>{route.params.protein}</Text>
           <Text style={styles.titledescription}> Description:</Text>
           <Text style={styles.description}>
-            {route.params.receptDescription}
+            {route.params.recipeDescription}
           </Text>
           <Text style={styles.titleingridens}>Ingridiens: </Text>
           <Text style={styles.ingridiens}>
-            {route.params.receptIngridients}
+            {route.params.recipeIngridients}
           </Text>
         </Card>
       </ScrollView>

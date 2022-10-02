@@ -45,7 +45,7 @@ export default function LogInScreen({ navigation, route }: Props) {
   }
   function handleFormSubmit(values: Values) {
     if (validateUser(values)) 
-     return navigation.navigate("Recept");
+     return navigation.navigate("Recipe");
   }
 
   async function changeScreenOrientationLandscape() {
@@ -124,7 +124,7 @@ export default function LogInScreen({ navigation, route }: Props) {
       <View>
         <Button
           title="Offline mood"
-          onPress={() => navigation.navigate("Recept")}
+          onPress={() => navigation.navigate("Recipe")}
         />
         <Button
           title="Dont have an account yet? Sign up here!"

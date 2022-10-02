@@ -15,13 +15,13 @@ export type RootStackParamList = {
   Details: {
     id: number;
     protein: string;
-    receptImage: string;
-    receptName: string;
-    receptDescription: string;
-    receptIngridients: string;
+    recipeImage: string;
+    recipeName: string;
+    recipeDescription: string;
+    recipeIngridients: string;
   };
   LoggIn: undefined;
-  Recept: undefined;
+  Recipe: undefined;
   SignUp: undefined;
   Favorit: undefined;
 };
@@ -59,9 +59,9 @@ export default function App() {
           options={{ title: "LoggIn" }}
         />
         <Stack.Screen
-          name="Recept"
+          name="Recipe"
           component={RecipeScreen}
-          options={{ title: "Recept" }}
+          options={{ title: "Recipe" }}
         />
         <Stack.Screen
           name="SignUp"

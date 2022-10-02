@@ -5,7 +5,7 @@ import { RootStackParamList } from "../../App";
 import { Formik} from "formik";
 import * as Yup from 'yup';
 import { mockUser } from "../interfaces/userInterface";
-import Recept from "../interfaces/receptInterface";
+import Recipe from "../interfaces/recipeInterface";
 
 
 
@@ -17,7 +17,7 @@ type User = {
   email: string,
   password: string,
   loggedIn: boolean,
-  favoritRecipe: Recept[],
+  favoritRecipe: Recipe[],
 }
 
 const validationSchema = Yup.object({

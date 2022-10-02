@@ -1,10 +1,10 @@
-import Recept from "./receptInterface";
+import Recipe from "./recipeInterface";
 export interface User {
   id: number;
   email: string;
   password: string;
   loggedIn: boolean;
-  favoritRecipe: Recept[];
+  favoritRecipe: Recipe[];
 }
 
 export const mockUser: User[] = [
