@@ -9,52 +9,45 @@ import {
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import * as yup from "yup";
-import { Formik } from "formik";
+import { ErrorMessage, Form, Formik } from "formik";
 import React, { useState } from "react";
-import { mockUser, User } from "../interfaces/userInterface";
-import { useRoute } from "@react-navigation/native";
+import { mockUser } from "../interfaces/userInterface";
 import * as ScreenOrientation from "expo-screen-orientation";
 
 type Props = NativeStackScreenProps<RootStackParamList, "LoggIn">;
-
-//test
-interface Values {
-  email: string;
-  password: string;
-}
 
 const styles = StyleSheet.create({
   formContainer: {
     padding: 50,
   },
 });
+interface Values {
+  email: string;
+  password: string;
+}
 
 export default function LogInScreen({ navigation, route }: Props) {
-  const [user, setUser] = useState<User | null>(null);
-
-  function changeUser(user: User) {
-    setUser(user);
-  }
   const inputStyle = {
     borderWidth: 1,
     borderColor: "#4e4e4e",
     padding: 12,
     marginBottom: 5,
   };
-  function handleFormSubmit(values: Values) {
-    if (validateUser(values)) {
-      navigation.navigate("Recept");
-    }
-  }
   function validateUser(values: Values) {
-    const user = mockUser.find(
+    const user = mockUser?.find(
       (user) => user.email == values.email && user.password == values.password
     );
-    if (user) {
-      changeUser(user);
+    if (user != undefined) {
+      user.loggedIn = true;
+      console.log(user.loggedIn);
       return true;
     } else return false;
   }
+  function handleFormSubmit(values: Values) {
+    if (validateUser(values)) 
+     return navigation.navigate("Recept");
+  }
+
   async function changeScreenOrientationLandscape() {
     await ScreenOrientation.lockAsync(
       ScreenOrientation.OrientationLock.LANDSCAPE_LEFT

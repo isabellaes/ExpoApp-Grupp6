@@ -5,13 +5,19 @@ import { RootStackParamList } from "../../App";
 import { Formik} from "formik";
 import * as Yup from 'yup';
 import { mockUser } from "../interfaces/userInterface";
+import Recept from "../interfaces/receptInterface";
+
+
+
 
 
 
 type User = {
   id: number,
   email: string,
-  password: string
+  password: string,
+  loggedIn: boolean,
+  favoritRecipe: Recept[],
 }
 
 const validationSchema = Yup.object({
@@ -45,13 +51,28 @@ const user = users?.find((user) => user.email === values.email);
 if(user)return true
 return false
 }
+function validUserToSignUp(values: User){
+if (!checkForOldUsers(values) && values.email.trim() && values.password.trim()){
+  console.log('singup user true')
+  return true;
+}else {
+  console.log('signup user false')}
+    return false
+    
+}
+
 
 function handleFormSubmit(values: User) {
-    if (checkForOldUsers(values)) {
-      return false
+    if(validUserToSignUp(values) === true)
+    {
+      console.log('Adding new user')
+      mockUser.push(values)
     }
-    mockUser.push(values)
-    navigation.navigate("LoggIn")
+    else{
+      const userAlreadyExists = <Text>User Already Exists</Text>
+      return userAlreadyExists;
+    }
+    
   }
 
 
@@ -59,7 +80,7 @@ function handleFormSubmit(values: User) {
     <View>
       
        <Formik
-      initialValues={{ id , email: '', password: '', confirmPassword: ''}}
+      initialValues={{ id , email: '', password: '', confirmPassword: '', loggedIn: false , favoritRecipe: []}}
        onSubmit={(values) => {
           handleFormSubmit(values);
         }}
@@ -72,6 +93,7 @@ function handleFormSubmit(values: User) {
           errors,
           touched,
           handleSubmit,
+          isValid,
         }) => (
           <View style={styles.formContainer}>
 
@@ -117,7 +139,9 @@ function handleFormSubmit(values: User) {
               </Text>
             )}
     
-            <Button onPress={() => { handleFormSubmit(values); }} title="Submit"
+            <Button disabled={!isValid} onPress={() => { handleSubmit()
+            ,handleFormSubmit(values);
+           }} title="Submit"
             />
             
             <Button onPress={() => navigation.navigate("Home")} title="Cancel"/>

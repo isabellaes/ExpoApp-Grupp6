@@ -9,7 +9,7 @@ import Input from "../components/inputComponent";
 import Item from "../components/listRecipeComponent";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Recept">;
-//test
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
