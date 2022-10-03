@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -13,6 +13,7 @@ import * as Speech from "expo-speech";
 import { mockUser } from "../interfaces/userInterface";
 import Item from "../components/listRecipeComponent";
 import Card from "../components/cardComponent";
+import { AntDesign } from "@expo/vector-icons";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Favorit">;
 
@@ -21,7 +22,24 @@ export default function FavoritScreen({ navigation, route }: Props) {
     const thingToSay = "Haj, and welcome to your side";
     Speech.speak(thingToSay);
   };
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
   const loggedInUser = mockUser.find((user) => user.loggedIn === true);
+
+  function removeRecipe() {
+    return loggedInUser?.favoritRecipe.splice(0, 1);
+  }
+
+  const handleToggleFavorite = useCallback(async () => {
+    setIsFavorite((val) => !val);
+
+    if (isEnabled) {
+      removeRecipe();
+    } else {
+      console.log("funkar inte");
+    }
+  }, [removeRecipe, isEnabled, isFavorite]);
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -41,6 +59,13 @@ export default function FavoritScreen({ navigation, route }: Props) {
                   recipeIngridients={item.recipeIngridients}
                 />
               </Text>
+              <AntDesign
+                style={styles.garbage}
+                onPress={handleToggleFavorite}
+                name="delete"
+                size={24}
+                color="black"
+              />
             </View>
           ))}
         </Card>
@@ -73,5 +98,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     height: 50,
     backgroundColor: "#B0C2D4",
+  },
+  garbage: {
+    marginLeft: 5,
   },
 });
