@@ -34,11 +34,11 @@ export default function FavoritScreen({ navigation, route }: Props) {
               <Text onPress={() => navigation.navigate("Details", item)}>
                 <Item
                   id={item.id}
-                  receptName={item.receptName}
-                  receptImage={item.receptImage}
+                  recipeName={item.recipeName}
+                  recipeImage={item.recipeImage}
                   protein={item.protein}
-                  receptDescription={item.receptDescription}
-                  receptIngridients={item.receptIngridients}
+                  recipeDescription={item.recipeDescription}
+                  recipeIngridients={item.recipeIngridients}
                 />
               </Text>
             </View>
@@ -46,7 +46,7 @@ export default function FavoritScreen({ navigation, route }: Props) {
         </Card>
       </ScrollView>
       <View style={styles.buttons}>
-        <Button title="Recept" onPress={() => navigation.navigate("Recept")} />
+        <Button title="Recipe" onPress={() => navigation.navigate("Recipe")} />
         <Button title="Home" onPress={() => navigation.navigate("Home")} />
       </View>
     </View>

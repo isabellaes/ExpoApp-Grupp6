@@ -1,5 +1,4 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
@@ -9,19 +8,20 @@ import RecipeScreen from "./src/screens/recipeScreen";
 import SignUpScreen from "./src/screens/signUpScreen";
 import FavoritScreen from "./src/screens/favoritScreen";
 import DetailScreen from "./src/screens/detailScreen";
+import { FontAwesome } from "@expo/vector-icons";
 
 export type RootStackParamList = {
   Home: undefined;
   Details: {
     id: number;
     protein: string;
-    receptImage: string;
-    receptName: string;
-    receptDescription: string;
-    receptIngridients: string;
+    recipeImage: string;
+    recipeName: string;
+    recipeDescription: string;
+    recipeIngridients: string;
   };
   LoggIn: undefined;
-  Recept: undefined;
+  Recipe: undefined;
   SignUp: undefined;
   Favorit: undefined;
 };
@@ -31,15 +31,15 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
   return (
     <NavigationContainer>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
           headerStyle: {
             backgroundColor: "#B0C2D4",
           },
-          headerTintColor: "#385AF0",
-          animation: "slide_from_bottom",
+          headerTintColor: "black",
+          animation: "slide_from_left",
           animationDuration: 700,
         }}
       >
@@ -59,9 +59,19 @@ export default function App() {
           options={{ title: "LoggIn" }}
         />
         <Stack.Screen
-          name="Recept"
+          name="Recipe"
           component={RecipeScreen}
-          options={{ title: "Recept" }}
+            options={({navigation}) => ({
+            title: "Recipe",
+            headerRight: () => (
+              <FontAwesome
+              name="heart"
+              size={25}
+              color="black"
+              onPress={() => navigation.navigate("Favorit")}
+            />
+            )})
+          }
         />
         <Stack.Screen
           name="SignUp"

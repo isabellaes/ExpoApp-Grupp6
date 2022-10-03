@@ -28,9 +28,11 @@ export default function DetailScreen({ navigation, route }: Props) {
   const loggedInUser = mockUser.find((user) => user.loggedIn === true);
   
   function addRecipe() {
-   const addUserFavoriteRecepie = loggedInUser?.favoritRecipe.push(route.params);
-  
-   return addUserFavoriteRecepie;
+   loggedInUser?.favoritRecipe.push(route.params);
+  }
+
+  function removeRecipe () {
+    return loggedInUser?.favoritRecipe.splice(0,1);
   }
  
   const playSound = React.useCallback(async () => {
@@ -40,6 +42,7 @@ export default function DetailScreen({ navigation, route }: Props) {
   }, []);
   
   const handleToggleFavorite = useCallback(async () => {
+    
      setIsFavorite(val => !val);
 
     if (isEnabled) {
@@ -47,9 +50,11 @@ export default function DetailScreen({ navigation, route }: Props) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         playSound();
         addRecipe();
-      }
-    }
-  }, [addRecipe, isEnabled, isFavorite, playSound]);
+      } else{
+        removeRecipe();
+      } 
+    } 
+  }, [removeRecipe, addRecipe, isEnabled, isFavorite, playSound]);
 
   useEffect(() => {
     currentSound ? () => {currentSound.unloadAsync();} : undefined;
@@ -63,24 +68,25 @@ export default function DetailScreen({ navigation, route }: Props) {
           <Text style={styles.id}>recipe nr.{route.params.id}</Text>
           <Image
             style={styles.image}
-            source={{ uri: route.params.receptImage }}
+            source={{ uri: route.params.recipeImage }}
           />
           
-          <Text style={styles.title}>{route.params.receptName}</Text>
-              <Pressable onPress={handleToggleFavorite}>
+          <Text style={styles.title}>{route.params.recipeName}</Text>
+              <Pressable onPress={handleToggleFavorite} style={styles.favoriteButton}>
                 <Ionicons
                 name={isFavorite ? 'heart' : 'heart-outline'}
                 size={35}
+                
                 />
               </Pressable>
           <Text style={styles.protein}>{route.params.protein}</Text>
           <Text style={styles.titledescription}> Description:</Text>
           <Text style={styles.description}>
-            {route.params.receptDescription}
+            {route.params.recipeDescription}
           </Text>
           <Text style={styles.titleingridens}>Ingridiens: </Text>
           <Text style={styles.ingridiens}>
-            {route.params.receptIngridients}
+            {route.params.recipeIngridients}
           </Text>
         </Card>
       </ScrollView>
@@ -152,4 +158,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#B0C2D4",
   },
+  favoriteButton: {
+    width: 35
+  }
 });

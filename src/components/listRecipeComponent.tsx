@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import Recept from "../interfaces/receptInterface";
+import Recipe from "../interfaces/recipeInterface";
 
 const styles = StyleSheet.create({
   title: {
@@ -28,14 +28,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const Item: FC<Recept> = (props) => {
+const Item: FC<Recipe> = (props) => {
   return (
     <View>
-      <Image style={styles.image} source={{ uri: props.receptImage }} />
-      <Text style={styles.title}>{props.receptName}</Text>
+      <Image style={styles.image} source={{ uri: props.recipeImage }} />
+      <Text style={styles.title}>{props.recipeName}</Text>
       <Text style={styles.protein}>{props.protein}</Text>
       <Text numberOfLines={1} style={styles.description}>
-        {props.receptDescription}
+        {props.recipeDescription}
       </Text>
     </View>
   );

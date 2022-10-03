@@ -3,12 +3,12 @@ import { Button, View, Text, StyleSheet, ScrollView } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import { data } from "../utils/mockData";
-import Recept from "../interfaces/receptInterface";
+import Recipe from "../interfaces/recipeInterface";
 import { Entypo, FontAwesome } from "@expo/vector-icons";
 import Input from "../components/inputComponent";
 import Item from "../components/listRecipeComponent";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Recept">;
+type Props = NativeStackScreenProps<RootStackParamList, "Recipe">;
 
 const styles = StyleSheet.create({
   container: {
@@ -36,40 +36,45 @@ const styles = StyleSheet.create({
 
 export default function RecipeScreen({ navigation, route }: Props) {
   const [SearchQuery, setSearchQuery] = useState<string>("");
-  const [recepts, setRecept] = useState<Recept[] | null>(null);
+  const [recipes, setRecipe] = useState<Recipe[] | null>(null);
 
   useEffect(() => {
     (() => {
-      setRecept(data);
+      setRecipe(data);
     })();
   }, []);
 
   const handleSearch = (text: any) => {
-    const recepts: Recept[] = data.filter((recept) =>
-      recept.receptName.includes(text)
-    );
-    setRecept(recepts);
+    if(text) {
+      const recipes:Recipe[] = data.filter((recipe) => {
+      const itemData = recipe.recipeName ? recipe.recipeName.toUpperCase() : ''.toUpperCase();
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+    setRecipe(recipes);
+    }
+    else setRecipe(data);
   };
 
-  const handleSortMeatRecept = () => {
-    const recepts: Recept[] = data.filter(
-      (recept) => recept.protein === "meat"
+  const handleSortMeatRecipe = () => {
+    const recipes: Recipe[] = data.filter(
+      (recipe) => recipe.protein === "meat"
     );
-    setRecept(recepts);
+    setRecipe(recipes);
   };
 
-  const handleSortFishRecept = () => {
-    const recepts: Recept[] = data.filter(
-      (recept) => recept.protein === "fish"
+  const handleSortFishRecipe = () => {
+    const recipes: Recipe[] = data.filter(
+      (recipe) => recipe.protein === "fish"
     );
-    setRecept(recepts);
+    setRecipe(recipes);
   };
 
   const handleSortVegetarian = () => {
-    const recepts: Recept[] = data.filter(
-      (recept) => recept.protein === "vegetarian"
+    const recipes: Recipe[] = data.filter(
+      (recipe) => recipe.protein === "vegetarian"
     );
-    setRecept(recepts);
+    setRecipe(recipes);
   };
 
   return (
@@ -84,24 +89,24 @@ export default function RecipeScreen({ navigation, route }: Props) {
 
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.category}>
-          <Button color="#8A8A8A" title="Meat" onPress={handleSortMeatRecept} />
-          <Button color="#8A8A8A" title="Fish" onPress={handleSortFishRecept} />
+          <Button color="#8A8A8A" title="Meat" onPress={handleSortMeatRecipe} />
+          <Button color="#8A8A8A" title="Fish" onPress={handleSortFishRecipe} />
           <Button
             color="#8A8A8A"
             title="Vegetarian"
             onPress={handleSortVegetarian}
           />
         </View>
-        {recepts?.map((item) => (
+        {recipes?.map((item) => (
           <View style={styles.item} key={item.id}>
             <Text>
               <Item
                 id={item.id}
-                receptName={item.receptName}
-                receptImage={item.receptImage}
+                recipeName={item.recipeName}
+                recipeImage={item.recipeImage}
                 protein={item.protein}
-                receptDescription={item.receptDescription}
-                receptIngridients={item.receptIngridients}
+                recipeDescription={item.recipeDescription}
+                recipeIngridients={item.recipeIngridients}
               />
             </Text>
             <Button

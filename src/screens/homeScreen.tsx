@@ -54,7 +54,7 @@ export default function HomeScreen({ navigation, route }: Props) {
   const image = require("../images/icon.png");
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Easy Recept</Text>
+      <Text style={styles.title}>Easy Recipe</Text>
       <Image source={image} style={styles.logoImage} />
       <Pressable
         style={styles.button}
@@ -64,7 +64,7 @@ export default function HomeScreen({ navigation, route }: Props) {
       </Pressable>
       <Pressable
         style={styles.button}
-        onPress={() => navigation.navigate("Recept")}
+        onPress={() => navigation.navigate("Recipe")}
       >
         <Text style={styles.text}>Use without sign in</Text>
       </Pressable>
