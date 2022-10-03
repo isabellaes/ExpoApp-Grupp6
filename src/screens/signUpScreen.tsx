@@ -26,7 +26,7 @@ const validationSchema = Yup.object({
     .trim()
     .min(4, 'Password is too short!').max(10, "Password should not excced 10 chars.")
     .required('Password is required!'),
-  confirmPassword: Yup.string().equals(
+  confirmPassword: Yup.string().required().equals(
     [Yup.ref('password'), null],
     'Password does not match!'
   ),
