@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Button, View, Text, StyleSheet, ScrollView } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
@@ -7,6 +7,7 @@ import Recipe from "../interfaces/recipeInterface";
 import { Entypo, FontAwesome } from "@expo/vector-icons";
 import Input from "../components/inputComponent";
 import Item from "../components/listRecipeComponent";
+import { mockUser } from "../interfaces/userInterface";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Recipe">;
 
@@ -35,8 +36,10 @@ const styles = StyleSheet.create({
 });
 
 export default function RecipeScreen({ navigation, route }: Props) {
-  const [SearchQuery, setSearchQuery] = useState<string>("");
   const [recipes, setRecipe] = useState<Recipe[] | null>(null);
+  const loggedInUser = mockUser.find((user) => user.loggedIn === true);
+
+  console.log(loggedInUser); // check if user is logged in
 
   useEffect(() => {
     (() => {
@@ -76,6 +79,14 @@ export default function RecipeScreen({ navigation, route }: Props) {
     );
     setRecipe(recipes);
   };
+
+  function loggOut() {
+    if (loggedInUser){
+      loggedInUser.loggedIn = false;
+      console.log(loggedInUser.loggedIn)
+    }
+    
+  }
 
   return (
     <View style={styles.container}>
@@ -124,10 +135,10 @@ export default function RecipeScreen({ navigation, route }: Props) {
           onPress={() => navigation.navigate("Home")}
         />
         <FontAwesome
-          name="sign-in"
+          name={loggedInUser ? "sign-out" : "sign-in"}
           size={30}
           color="black"
-          onPress={() => navigation.navigate("LoggIn")}
+          onPress={() => loggedInUser ? ((navigation.navigate("Home", ),loggOut())) : navigation.navigate("LoggIn")}
         />
       </View>
     </View>
