@@ -59,6 +59,11 @@ export default function RecipeScreen({ navigation, route }: Props) {
     else setRecipe(data);
   };
 
+  const handleSortAll = () => {
+    const recipes: Recipe[] = data
+    setRecipe(recipes);
+  };
+
   const handleSortMeatRecipe = () => {
     const recipes: Recipe[] = data.filter(
       (recipe) => recipe.protein === "meat"
@@ -82,8 +87,7 @@ export default function RecipeScreen({ navigation, route }: Props) {
 
   function loggOut() {
     if (loggedInUser){
-      loggedInUser.loggedIn = false;
-      console.log(loggedInUser.loggedIn)
+      return console.log(loggedInUser.loggedIn == false);
     }
     
   }
@@ -100,6 +104,7 @@ export default function RecipeScreen({ navigation, route }: Props) {
 
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.category}>
+        <Button color="#8A8A8A" title="All" onPress={handleSortAll} />
           <Button color="#8A8A8A" title="Meat" onPress={handleSortMeatRecipe} />
           <Button color="#8A8A8A" title="Fish" onPress={handleSortFishRecipe} />
           <Button
