@@ -9,6 +9,7 @@ import SignUpScreen from "./src/screens/signUpScreen";
 import FavoritScreen from "./src/screens/favoritScreen";
 import DetailScreen from "./src/screens/detailScreen";
 import { FontAwesome } from "@expo/vector-icons";
+import { mockUser } from "./src/interfaces/userInterface";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -27,6 +28,7 @@ export type RootStackParamList = {
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+const loggedInUser = mockUser.find((user) => user.loggedIn === true);
 
 export default function App() {
   return (
@@ -68,7 +70,7 @@ export default function App() {
               name="heart"
               size={25}
               color="black"
-              onPress={() => navigation.navigate("Favorit")}
+              onPress={() => loggedInUser? navigation.navigate("Favorit") : navigation.navigate("LoggIn")}
             />
             )})
           }
