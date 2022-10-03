@@ -80,6 +80,14 @@ export default function RecipeScreen({ navigation, route }: Props) {
     setRecipe(recipes);
   };
 
+  function loggOut() {
+    if (loggedInUser){
+      loggedInUser.loggedIn = false;
+      console.log(loggedInUser.loggedIn)
+    }
+    
+  }
+
   return (
     <View style={styles.container}>
       <View>
@@ -130,7 +138,7 @@ export default function RecipeScreen({ navigation, route }: Props) {
           name={loggedInUser ? "sign-out" : "sign-in"}
           size={30}
           color="black"
-          onPress={() => loggedInUser ? navigation.navigate("Home") : navigation.navigate("LoggIn")}
+          onPress={() => loggedInUser ? ((navigation.navigate("Home", ),loggOut())) : navigation.navigate("LoggIn")}
         />
       </View>
     </View>
