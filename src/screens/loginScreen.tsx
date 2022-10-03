@@ -39,7 +39,7 @@ export default function LogInScreen({ navigation, route }: Props) {
     );
     if (user != undefined) {
       user.loggedIn = true;
-      console.log(user.loggedIn);
+  
       return true;
     } else return false;
   }
