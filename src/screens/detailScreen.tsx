@@ -34,6 +34,10 @@ export default function DetailScreen({ navigation, route }: Props) {
   function removeRecipe () {
     return loggedInUser?.favoritRecipe.splice(0,1);
   }
+
+  function nothingChange() {
+    console.log("nothing change");
+  }
  
   const playSound = React.useCallback(async () => {
     const { sound } = await Audio.Sound.createAsync(src);
@@ -45,16 +49,14 @@ export default function DetailScreen({ navigation, route }: Props) {
     
      setIsFavorite(val => !val);
 
-    if (isEnabled) {
       if(!isFavorite) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         playSound();
         addRecipe();
       } else{
         removeRecipe();
-      } 
-    } 
-  }, [removeRecipe, addRecipe, isEnabled, isFavorite, playSound]);
+      }  
+  }, [removeRecipe, addRecipe, isFavorite, playSound]);
 
   useEffect(() => {
     currentSound ? () => {currentSound.unloadAsync();} : undefined;
@@ -72,7 +74,7 @@ export default function DetailScreen({ navigation, route }: Props) {
           />
           
           <Text style={styles.title}>{route.params.recipeName}</Text>
-              <Pressable onPress={handleToggleFavorite} style={styles.favoriteButton}>
+              <Pressable onPress={loggedInUser? handleToggleFavorite : nothingChange} style={styles.favoriteButton}>
                 <Ionicons
                 name={isFavorite ? 'heart' : 'heart-outline'}
                 size={35}
@@ -96,7 +98,7 @@ export default function DetailScreen({ navigation, route }: Props) {
 
         <Button
           title="Go to favorits"
-          onPress={() => navigation.navigate("Favorit")}
+          onPress={() => loggedInUser ? navigation.navigate("Favorit") : navigation.navigate("LoggIn")}
         />
       </View>
     </View>
