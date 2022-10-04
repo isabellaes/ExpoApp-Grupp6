@@ -28,8 +28,12 @@ export default function FavoritScreen({ navigation, route }: Props) {
   const loggedInUser = mockUser.find((user) => user.loggedIn === true);
 
   function removeRecipeTest(item: Recipe) {
-    const remove = loggedInUser?.favoritRecipe.indexOf(item);
-    return loggedInUser?.favoritRecipe.splice(0, remove);
+    const index = loggedInUser?.favoritRecipe.indexOf(item, 0);
+    if (index != undefined && index > -1) {
+      loggedInUser?.favoritRecipe.splice(index, 1);
+    }
+    const removeItem = loggedInUser?.favoritRecipe.indexOf(item);
+    loggedInUser?.favoritRecipe.splice(0, removeItem);
   }
 
   // const handleToggleFavorite = useCallback(async () => {
