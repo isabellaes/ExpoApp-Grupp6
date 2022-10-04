@@ -47,7 +47,6 @@ export default function FavoritScreen({ navigation, route }: Props) {
       </ScrollView>
       <View style={styles.buttons}>
         <Button title="Recipe" onPress={() => navigation.navigate("Recipe")} />
-        <Button title="Home" onPress={() => navigation.navigate("Home")} />
       </View>
     </View>
   );
