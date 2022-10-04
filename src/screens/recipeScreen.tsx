@@ -139,12 +139,6 @@ export default function RecipeScreen({ navigation, route }: Props) {
        
       </ScrollView>
       <View style={styles.homeAndLogInButton}>
-        <Entypo
-          name="home"
-          size={30}
-          color="black"
-          onPress={() => navigation.navigate("Home")}
-        />
         <FontAwesome
           name={loggedInUser ? "sign-out" : "sign-in"}
           size={30}

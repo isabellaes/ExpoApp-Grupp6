@@ -94,8 +94,6 @@ export default function DetailScreen({ navigation, route }: Props) {
       </ScrollView>
 
       <View style={styles.buttons}>
-        <Button title="Home" onPress={() => navigation.navigate("Home")} />
-
         <Button
           title="Go to favorits"
           onPress={() => loggedInUser ? navigation.navigate("Favorit") : navigation.navigate("LoggIn")}

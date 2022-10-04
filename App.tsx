@@ -8,7 +8,7 @@ import RecipeScreen from "./src/screens/recipeScreen";
 import SignUpScreen from "./src/screens/signUpScreen";
 import FavoritScreen from "./src/screens/favoritScreen";
 import DetailScreen from "./src/screens/detailScreen";
-import { FontAwesome } from "@expo/vector-icons";
+import { Entypo, FontAwesome } from "@expo/vector-icons";
 import { mockUser } from "./src/interfaces/userInterface";
 
 export type RootStackParamList = {
@@ -30,7 +30,12 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
-const loggedInUser = mockUser.find((user) => user.loggedIn === true);
+let loggedInUser = mockUser.find((user) => user.loggedIn === true);
+
+function LoggOut () {
+  const loggOut = loggedInUser?.loggedIn == false;
+  console.log(loggOut);
+}
   return (
     <NavigationContainer>
       <StatusBar style="dark" />
@@ -65,6 +70,14 @@ const loggedInUser = mockUser.find((user) => user.loggedIn === true);
           component={RecipeScreen}
             options={({navigation}) => ({
             title: "Recipe",
+            headerLeft: () => (
+                <Entypo
+                name="home"
+                size={30}
+                color="black"
+                onPress={() => loggedInUser ? (navigation.navigate("Home"),LoggOut) : navigation.navigate("LoggIn")}
+              />
+            ),
             headerRight: () => (
               <FontAwesome
               name="heart"
