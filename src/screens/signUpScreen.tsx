@@ -20,17 +20,7 @@ type User = {
   favoritRecipe: Recipe[],
 }
 
-const validationSchema = Yup.object({
-  email: Yup.string().email('Invalid email!').required('Email is required!'),
-  password: Yup.string()
-    .trim()
-    .min(4, 'Password is too short!').max(10, "Password should not excced 10 chars.")
-    .required('Password is required!'),
-  confirmPassword: Yup.string().required().equals(
-    [Yup.ref('password'), null],
-    'Password does not match!'
-  ),
-});
+
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 
 
@@ -46,6 +36,18 @@ const [users, setUsers] = useState<User[]>();
     })();
   }, []);
 
+  const validationSchema = Yup.object({
+  email: Yup.string().email('Invalid email!').notOneOf(mockUser.map((values) => values.email) , 'Email already taken').required('Email is required!'),
+  password: Yup.string()
+    .trim()
+    .min(4, 'Password is too short!').max(10, "Password should not excced 10 chars.")
+    .required('Password is required!'),
+  confirmPassword: Yup.string().required('Confirmation password is required').equals(
+    [Yup.ref('password'), null],
+    'Password does not match!'
+  ),
+});
+
 function checkForOldUsers(values: User){
 const user = users?.find((user) => user.email === values.email);
 if(user)return true
@@ -53,24 +55,20 @@ return false
 }
 function validUserToSignUp(values: User){
 if (!checkForOldUsers(values) && values.email.trim() && values.password.trim()){
-  console.log('singup user true')
+  navigation.navigate('LoggIn')
   return true;
-}else {
-  console.log('signup user false')}
-    return false
-    
+}else 
+    return false 
 }
 
 
 function handleFormSubmit(values: User) {
     if(validUserToSignUp(values) === true)
     {
-      console.log('Adding new user')
       mockUser.push(values)
     }
     else{
-      const userAlreadyExists = <Text>User Already Exists</Text>
-      return userAlreadyExists;
+      return false
     }
     
   }
@@ -144,7 +142,7 @@ function handleFormSubmit(values: User) {
            }} title="Submit"
             />
             
-            <Button onPress={() => navigation.navigate("Home")} title="Cancel"/>
+            <Button  onPress={() => navigation.navigate("Home")} title="Cancel"/>
           </View>
         )}
       </Formik>
