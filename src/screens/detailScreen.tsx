@@ -34,8 +34,6 @@ export default function DetailScreen({ navigation, route }: Props) {
         setIsFavorite(true);
     });
   });
-  
-  
   function addRecipe() {
    const a = loggedInUser?.favoritRecipe.find(item => item.recipeName === route.params.recipeName);
    if(!a){
@@ -52,7 +50,7 @@ export default function DetailScreen({ navigation, route }: Props) {
   }
 
   function nothingChange() {
-    console.log("nothing change");
+    console.log("");
   }
  
   const playSound = React.useCallback(async () => {
@@ -71,6 +69,7 @@ export default function DetailScreen({ navigation, route }: Props) {
         addRecipe();
       } else{
         removeRecipe();
+        playSound();
 
       }  
   }, [removeRecipe, addRecipe, isFavorite, playSound]);
@@ -111,8 +110,6 @@ export default function DetailScreen({ navigation, route }: Props) {
       </ScrollView>
 
       <View style={styles.buttons}>
-        <Button title="Home" onPress={() => navigation.navigate("Home")} />
-
         <Button
           title="Go to favorits"
           onPress={() => loggedInUser ? navigation.navigate("Favorit") : navigation.navigate("LoggIn")}
