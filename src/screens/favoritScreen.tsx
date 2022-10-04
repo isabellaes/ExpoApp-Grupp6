@@ -30,7 +30,7 @@ export default function FavoritScreen({ navigation, route }: Props) {
         </View>
         <Card>
           {loggedInUser?.favoritRecipe.map((item) => (
-            <View style={styles.containerInfo}>
+            <View key={item.id} style={styles.containerInfo}>
               <Text onPress={() => navigation.navigate("Details", item)}>
                 <Item
                   id={item.id}
