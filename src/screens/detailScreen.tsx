@@ -15,6 +15,7 @@ import { mockUser } from "../interfaces/userInterface";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from 'expo-haptics';
 import { Audio } from 'expo-av';
+import Recipe from "../interfaces/recipeInterface";
 
 
 type Props = NativeStackScreenProps<RootStackParamList, "Details">;
@@ -26,13 +27,28 @@ export default function DetailScreen({ navigation, route }: Props) {
   const [isEnabled, setIsEnabled] = useState(true);
   const [currentSound, setSound] = useState<Audio.Sound|null>(null);
   const loggedInUser = mockUser.find((user) => user.loggedIn === true);
+
+  useEffect(() => {
+    loggedInUser?.favoritRecipe.forEach(element => {
+      if (element.id === route.params.id)
+        setIsFavorite(true);
+    });
+  });
+  
   
   function addRecipe() {
-   loggedInUser?.favoritRecipe.push(route.params);
+   const a = loggedInUser?.favoritRecipe.find(item => item.recipeName === route.params.recipeName);
+   if(!a){
+    loggedInUser?.favoritRecipe.push(route.params);
+    }
   }
-
-  function removeRecipe () {
-    return loggedInUser?.favoritRecipe.splice(0,1);
+  function removeRecipe() {
+    const index = loggedInUser?.favoritRecipe.indexOf(route.params, 0) ?? -1;
+    console.log(index);
+    if(index > -1) {
+      return loggedInUser?.favoritRecipe.splice(index, 1);
+    }
+    
   }
 
   function nothingChange() {
@@ -55,6 +71,7 @@ export default function DetailScreen({ navigation, route }: Props) {
         addRecipe();
       } else{
         removeRecipe();
+
       }  
   }, [removeRecipe, addRecipe, isFavorite, playSound]);
 
