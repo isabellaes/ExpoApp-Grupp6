@@ -28,9 +28,9 @@ export type RootStackParamList = {
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const loggedInUser = mockUser.find((user) => user.loggedIn === true);
 
 export default function App() {
+const loggedInUser = mockUser.find((user) => user.loggedIn === true);
   return (
     <NavigationContainer>
       <StatusBar style="dark" />
@@ -70,7 +70,7 @@ export default function App() {
               name="heart"
               size={25}
               color="black"
-              onPress={() => loggedInUser? navigation.navigate("Favorit") : navigation.navigate("LoggIn")}
+              onPress={() => loggedInUser ? navigation.navigate("Favorit") : navigation.navigate("LoggIn")}
             />
             )})
           }

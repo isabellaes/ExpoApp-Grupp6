@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Button, View, Text, StyleSheet, ScrollView } from "react-native";
+import { Button, View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import { data } from "../utils/mockData";
@@ -8,6 +8,8 @@ import { Entypo, FontAwesome } from "@expo/vector-icons";
 import Input from "../components/inputComponent";
 import Item from "../components/listRecipeComponent";
 import { mockUser } from "../interfaces/userInterface";
+import { FlashList } from "@shopify/flash-list";
+
 
 type Props = NativeStackScreenProps<RootStackParamList, "Recipe">;
 
@@ -38,6 +40,7 @@ const styles = StyleSheet.create({
 export default function RecipeScreen({ navigation, route }: Props) {
   const [recipes, setRecipe] = useState<Recipe[] | null>(null);
   const loggedInUser = mockUser.find((user) => user.loggedIn === true);
+  
 
   console.log(loggedInUser); // check if user is logged in
 
@@ -97,8 +100,7 @@ export default function RecipeScreen({ navigation, route }: Props) {
           onChangeText={(text) => handleSearch(text)}
         />
       </View>
-
-      <ScrollView contentContainerStyle={{ alignItems: "center" }}>
+      <ScrollView >
         <View style={styles.category}>
           <Button color="#8A8A8A" title="Meat" onPress={handleSortMeatRecipe} />
           <Button color="#8A8A8A" title="Fish" onPress={handleSortFishRecipe} />
@@ -107,11 +109,13 @@ export default function RecipeScreen({ navigation, route }: Props) {
             title="Vegetarian"
             onPress={handleSortVegetarian}
           />
-        </View>
-        {recipes?.map((item) => (
-          <View style={styles.item} key={item.id}>
-            <Text>
-              <Item
+        </View >
+        <View style={{height: Dimensions.get("screen").height,  width: Dimensions.get("screen").width }}>
+        <FlashList
+          data={recipes}
+          renderItem={({item}) => 
+          <Text>
+            <Item 
                 id={item.id}
                 recipeName={item.recipeName}
                 recipeImage={item.recipeImage}
@@ -119,13 +123,15 @@ export default function RecipeScreen({ navigation, route }: Props) {
                 recipeDescription={item.recipeDescription}
                 recipeIngridients={item.recipeIngridients}
               />
-            </Text>
-            <Button
+              <Button
               title="Details"
               onPress={() => navigation.navigate("Details", item)}
             />
-          </View>
-        ))}
+            </Text>}
+          estimatedItemSize={200}
+        />
+        </View>
+       
       </ScrollView>
       <View style={styles.homeAndLogInButton}>
         <Entypo
