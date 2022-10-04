@@ -14,6 +14,7 @@ import { mockUser } from "../interfaces/userInterface";
 import Item from "../components/listRecipeComponent";
 import Card from "../components/cardComponent";
 import { AntDesign } from "@expo/vector-icons";
+import Recipe from "../interfaces/recipeInterface";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Favorit">;
 
@@ -26,19 +27,20 @@ export default function FavoritScreen({ navigation, route }: Props) {
   const [isEnabled, setIsEnabled] = useState(true);
   const loggedInUser = mockUser.find((user) => user.loggedIn === true);
 
-  function removeRecipe() {
-    return loggedInUser?.favoritRecipe.splice(0, 1);
+  function removeRecipeTest(item: Recipe) {
+    const remove = loggedInUser?.favoritRecipe.indexOf(item);
+    return loggedInUser?.favoritRecipe.splice(0, remove);
   }
 
-  const handleToggleFavorite = useCallback(async () => {
-    setIsFavorite((val) => !val);
+  // const handleToggleFavorite = useCallback(async () => {
+  //   setIsFavorite((val) => !val);
 
-    if (isEnabled) {
-      removeRecipe();
-    } else {
-      console.log("funkar inte");
-    }
-  }, [removeRecipe, isEnabled, isFavorite]);
+  //   if (isEnabled) {
+  //     removeRecipeTest();
+  //   } else {
+  //     console.log("funkar inte");
+  //   }
+  // }, [removeRecipeTest, isEnabled, isFavorite]);
 
   return (
     <View style={styles.container}>
@@ -61,7 +63,9 @@ export default function FavoritScreen({ navigation, route }: Props) {
               </Text>
               <AntDesign
                 style={styles.garbage}
-                onPress={handleToggleFavorite}
+                onPress={() => {
+                  removeRecipeTest(item);
+                }}
                 name="delete"
                 size={24}
                 color="black"
