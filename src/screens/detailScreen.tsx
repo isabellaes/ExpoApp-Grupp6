@@ -15,6 +15,7 @@ import { mockUser } from "../interfaces/userInterface";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from 'expo-haptics';
 import { Audio } from 'expo-av';
+import Recipe from "../interfaces/recipeInterface";
 
 
 type Props = NativeStackScreenProps<RootStackParamList, "Details">;
@@ -26,17 +27,30 @@ export default function DetailScreen({ navigation, route }: Props) {
   const [isEnabled, setIsEnabled] = useState(true);
   const [currentSound, setSound] = useState<Audio.Sound|null>(null);
   const loggedInUser = mockUser.find((user) => user.loggedIn === true);
-  
-  function addRecipe() {
-   loggedInUser?.favoritRecipe.push(route.params);
-  }
 
-  function removeRecipe () {
-    return loggedInUser?.favoritRecipe.splice(0,1);
+  useEffect(() => {
+    loggedInUser?.favoritRecipe.forEach(element => {
+      if (element.id === route.params.id)
+        setIsFavorite(true);
+    });
+  });
+  function addRecipe() {
+   const a = loggedInUser?.favoritRecipe.find(item => item.recipeName === route.params.recipeName);
+   if(!a){
+    loggedInUser?.favoritRecipe.push(route.params);
+    }
+  }
+  function removeRecipe() {
+    const index = loggedInUser?.favoritRecipe.indexOf(route.params, 0) ?? -1;
+    console.log(index);
+    if(index > -1) {
+      return loggedInUser?.favoritRecipe.splice(index, 1);
+    }
+    
   }
 
   function nothingChange() {
-    console.log("nothing change");
+    console.log("");
   }
  
   const playSound = React.useCallback(async () => {
@@ -55,6 +69,8 @@ export default function DetailScreen({ navigation, route }: Props) {
         addRecipe();
       } else{
         removeRecipe();
+        playSound();
+
       }  
   }, [removeRecipe, addRecipe, isFavorite, playSound]);
 
@@ -94,8 +110,6 @@ export default function DetailScreen({ navigation, route }: Props) {
       </ScrollView>
 
       <View style={styles.buttons}>
-        <Button title="Home" onPress={() => navigation.navigate("Home")} />
-
         <Button
           title="Go to favorits"
           onPress={() => loggedInUser ? navigation.navigate("Favorit") : navigation.navigate("LoggIn")}

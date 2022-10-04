@@ -1,18 +1,14 @@
-import {
-  Button,
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../App";
-import * as yup from "yup";
-import { ErrorMessage, Form, Formik } from "formik";
-import React, { useState } from "react";
-import { mockUser } from "../interfaces/userInterface";
 import * as ScreenOrientation from "expo-screen-orientation";
+import { Formik } from "formik";
+import React, { useEffect } from "react";
+import {
+  Button, ScrollView, StyleSheet, Text,
+  TextInput, View
+} from "react-native";
+import * as yup from "yup";
+import { RootStackParamList } from "../../App";
+import { mockUser } from "../interfaces/userInterface";
 
 type Props = NativeStackScreenProps<RootStackParamList, "LoggIn">;
 
@@ -27,6 +23,16 @@ interface Values {
 }
 
 export default function LogInScreen({ navigation, route }: Props) {
+
+  let loggedInUser = mockUser.find((user) => user.loggedIn === true);
+
+useEffect(() => {
+  (() => {
+    console.log(loggedInUser?.loggedIn);
+    loggedInUser = mockUser.find((user) => user.loggedIn === true);
+  })();
+}, []);
+
   const inputStyle = {
     borderWidth: 1,
     borderColor: "#4e4e4e",
@@ -45,7 +51,7 @@ export default function LogInScreen({ navigation, route }: Props) {
   }
   function handleFormSubmit(values: Values) {
     if (validateUser(values)) 
-     return navigation.navigate("Recipe");
+     navigation.navigate("Recipe");
   }
 
   async function changeScreenOrientationLandscape() {

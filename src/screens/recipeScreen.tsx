@@ -1,14 +1,15 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { Button, View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../App";
-import { data } from "../utils/mockData";
-import Recipe from "../interfaces/recipeInterface";
 import { Entypo, FontAwesome } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { FlashList } from "@shopify/flash-list";
+import React, { useEffect, useState } from "react";
+import { Button, Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import { RootStackParamList } from "../../App";
 import Input from "../components/inputComponent";
 import Item from "../components/listRecipeComponent";
-import { mockUser } from "../interfaces/userInterface";
-import { FlashList } from "@shopify/flash-list";
+import Recipe from "../interfaces/recipeInterface";
+import { mockUser, User } from "../interfaces/userInterface";
+import { data } from "../utils/mockData";
 
 
 type Props = NativeStackScreenProps<RootStackParamList, "Recipe">;
@@ -39,16 +40,22 @@ const styles = StyleSheet.create({
 
 export default function RecipeScreen({ navigation, route }: Props) {
   const [recipes, setRecipe] = useState<Recipe[] | null>(null);
-  const loggedInUser = mockUser.find((user) => user.loggedIn === true);
-  
 
-  console.log(loggedInUser); // check if user is logged in
+  const [loggedInUser, setLoggedInUSer] =  useState<User>();
+
+  console.log(loggedInUser?.id);
 
   useEffect(() => {
     (() => {
       setRecipe(data);
     })();
-  }, []);
+  },[]);
+
+  useFocusEffect(() => {
+    (() => {
+      setLoggedInUSer(mockUser.find((user) => user.loggedIn === true));
+    })();
+  },);
 
   const handleSearch = (text: any) => {
     if(text) {
@@ -89,10 +96,10 @@ export default function RecipeScreen({ navigation, route }: Props) {
   };
 
   function loggOut() {
-    if (loggedInUser){
-      return console.log(loggedInUser.loggedIn == false);
+    if (loggedInUser?.loggedIn){
+        alert("You are logged out!");
+      return (loggedInUser.loggedIn = false);
     }
-    
   }
 
   return (
@@ -139,17 +146,11 @@ export default function RecipeScreen({ navigation, route }: Props) {
        
       </ScrollView>
       <View style={styles.homeAndLogInButton}>
-        <Entypo
-          name="home"
-          size={30}
-          color="black"
-          onPress={() => navigation.navigate("Home")}
-        />
         <FontAwesome
-          name={loggedInUser ? "sign-out" : "sign-in"}
+          name={loggedInUser?.loggedIn ? "sign-out" : "sign-in"}
           size={30}
           color="black"
-          onPress={() => loggedInUser ? ((navigation.navigate("Home", ),loggOut())) : navigation.navigate("LoggIn")}
+          onPress={() => loggedInUser?.loggedIn ? ((navigation.navigate("Home", ),loggOut())) : navigation.navigate("LoggIn")}
         />
       </View>
     </View>

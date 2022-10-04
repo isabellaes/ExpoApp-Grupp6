@@ -1,15 +1,15 @@
-import { StatusBar } from "expo-status-bar";
+import { FontAwesome } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { mockUser } from "./src/interfaces/userInterface";
+import DetailScreen from "./src/screens/detailScreen";
+import FavoritScreen from "./src/screens/favoritScreen";
 import HomeScreen from "./src/screens/homeScreen";
 import LogInScreen from "./src/screens/loginScreen";
 import RecipeScreen from "./src/screens/recipeScreen";
 import SignUpScreen from "./src/screens/signUpScreen";
-import FavoritScreen from "./src/screens/favoritScreen";
-import DetailScreen from "./src/screens/detailScreen";
-import { FontAwesome } from "@expo/vector-icons";
-import { mockUser } from "./src/interfaces/userInterface";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -30,7 +30,12 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
-const loggedInUser = mockUser.find((user) => user.loggedIn === true);
+ 
+  function checkIfLoggedInForFavorite() {
+    const loggedInUser = mockUser.find((user) => user.loggedIn === true);
+    return loggedInUser
+      }
+
   return (
     <NavigationContainer>
       <StatusBar style="dark" />
@@ -70,7 +75,7 @@ const loggedInUser = mockUser.find((user) => user.loggedIn === true);
               name="heart"
               size={25}
               color="black"
-              onPress={() => loggedInUser ? navigation.navigate("Favorit") : navigation.navigate("LoggIn")}
+              onPress={() => checkIfLoggedInForFavorite() ? ((navigation.navigate("Favorit", ))) : navigation.navigate("LoggIn")}
             />
             )})
           }
