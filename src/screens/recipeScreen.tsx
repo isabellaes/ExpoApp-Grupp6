@@ -40,8 +40,10 @@ const styles = StyleSheet.create({
 
 export default function RecipeScreen({ navigation, route }: Props) {
   const [recipes, setRecipe] = useState<Recipe[] | null>(null);
-  
+
   const [loggedInUser, setLoggedInUSer] =  useState<User>();
+
+  console.log(loggedInUser?.id);
 
   useEffect(() => {
     (() => {
@@ -95,9 +97,9 @@ export default function RecipeScreen({ navigation, route }: Props) {
 
   function loggOut() {
     if (loggedInUser?.loggedIn){
-      return console.log(loggedInUser.loggedIn = false);
+        alert("You are logged out!");
+      return (loggedInUser.loggedIn = false);
     }
-    
   }
 
   return (
@@ -144,12 +146,6 @@ export default function RecipeScreen({ navigation, route }: Props) {
        
       </ScrollView>
       <View style={styles.homeAndLogInButton}>
-        <Entypo
-          name="home"
-          size={30}
-          color="black"
-          onPress={() => navigation.navigate("Home")}
-        />
         <FontAwesome
           name={loggedInUser?.loggedIn ? "sign-out" : "sign-in"}
           size={30}
