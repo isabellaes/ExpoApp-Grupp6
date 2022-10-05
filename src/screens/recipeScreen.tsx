@@ -12,6 +12,7 @@ import { mockUser, User } from "../interfaces/userInterface";
 import { data } from "../utils/mockData";
 
 
+
 type Props = NativeStackScreenProps<RootStackParamList, "Recipe">;
 
 const styles = StyleSheet.create({
@@ -42,6 +43,7 @@ export default function RecipeScreen({ navigation, route }: Props) {
   const [recipes, setRecipe] = useState<Recipe[] | null>(null);
 
   const [loggedInUser, setLoggedInUSer] =  useState<User>();
+
 
   console.log(loggedInUser?.id);
 

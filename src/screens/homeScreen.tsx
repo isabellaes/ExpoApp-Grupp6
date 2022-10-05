@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { Pressable, View, Text, StyleSheet, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 //test
@@ -25,11 +28,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
   },
-  title: {
-    fontSize: 50,
-    margin: 30,
-    color: "#6A0617",
-  },
   text: {
     color: "white",
     fontSize: 16,
@@ -52,9 +50,30 @@ const styles = StyleSheet.create({
 
 export default function HomeScreen({ navigation, route }: Props) {
   const image = require("../images/icon.png");
+  const [fontsLoaded] = useFonts({
+    'Srpingtime-Romance': require('../font/SpringtimeRomance.ttf'),
+  });
+
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Easy Recipe</Text>
+    <View style={styles.container} onLayout={onLayoutRootView}>
+      <Text style={{ fontFamily: 'Srpingtime-Romance', fontSize: 60, color: "#6A0617" }}>Easy Recipe</Text>
       <Image source={image} style={styles.logoImage} />
       <Pressable
         style={styles.button}
