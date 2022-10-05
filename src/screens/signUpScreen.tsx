@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, View, Text, TextInput, StyleSheet } from "react-native";
+import { Button, View, Text, TextInput, StyleSheet, Alert } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import { Formik} from "formik";
@@ -65,12 +65,12 @@ if (!checkForOldUsers(values) && values.email.trim() && values.password.trim()){
 function handleFormSubmit(values: User) {
     if(validUserToSignUp(values) === true)
     {
+      Alert.alert('Your account has been created!! YEEEEEEEEEEEEEET')
       mockUser.push(values)
     }
     else{
       return false
     }
-    
   }
 
 
