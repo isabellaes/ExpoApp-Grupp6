@@ -6,6 +6,7 @@ import { Formik} from "formik";
 import * as Yup from 'yup';
 import { mockUser } from "../interfaces/userInterface";
 import Recipe from "../interfaces/recipeInterface";
+import Checkbox from "expo-checkbox";
 
 
 
@@ -29,6 +30,8 @@ export default function SignUpScreen({ navigation }: Props) {
   let id = Math.random();
 
 const [users, setUsers] = useState<User[]>();
+const [isChecked, setChecked] = useState(false);
+
 
   useEffect(() => {
     (() => {
@@ -113,7 +116,7 @@ function handleFormSubmit(values: User) {
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
               style={inputStyle}
-              secureTextEntry={true}
+              secureTextEntry={isChecked ? false : true}
               value={values.password}
               placeholder="Password"
             />
@@ -127,7 +130,7 @@ function handleFormSubmit(values: User) {
               onChangeText={handleChange("confirmPassword")}
               onBlur={handleBlur("confirmPassword")}
               style={inputStyle}
-              secureTextEntry={true}
+              secureTextEntry={isChecked ? false : true}
               value={values.confirmPassword}
               placeholder="Confirm Password"
             />
@@ -136,6 +139,17 @@ function handleFormSubmit(values: User) {
                 {errors.confirmPassword}
               </Text>
             )}
+
+            <View style={styles.section}>
+            <Checkbox
+          style={styles.checkbox}
+          value={isChecked}
+          onValueChange={setChecked}
+          color={isChecked ? '#4630EB' : undefined}
+        />
+           <Text>Show Password</Text>
+            </View>
+           
     
             <Button disabled={!isValid} onPress={() => { handleSubmit()
             ,handleFormSubmit(values);
@@ -156,6 +170,14 @@ const styles = StyleSheet.create({
   formContainer: {
     padding: 50,
   },
+   checkbox: {
+    margin: 8,
+  },
+   section: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
 });
   
   const inputStyle = {
