@@ -36,6 +36,15 @@ export default function App() {
     return loggedInUser
       }
 
+      function checkIfLoggedIn() {
+        const loggedInUser = mockUser.find((user) => user.loggedIn === true);
+        if(loggedInUser?.loggedIn)
+        {
+          alert("You must logg out first!")
+        }
+        return loggedInUser
+        }
+
   return (
     <NavigationContainer>
       <StatusBar style="dark" />
@@ -77,7 +86,16 @@ export default function App() {
               color="black"
               onPress={() => checkIfLoggedInForFavorite() ? ((navigation.navigate("Favorit", ))) : navigation.navigate("LoggIn")}
             />
-            )})
+            ), 
+            headerLeft: () => (
+              <FontAwesome
+              name="home"
+              size={30}
+              color="black"
+              onPress={() => checkIfLoggedIn() ?? navigation.navigate("Home")}
+              />
+            )
+            })
           }
         />
         <Stack.Screen
