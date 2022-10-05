@@ -1,4 +1,4 @@
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Entypo } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
@@ -88,7 +88,7 @@ export default function App() {
             />
             ), 
             headerLeft: () => (
-              <FontAwesome
+              <Entypo
               name="home"
               size={30}
               color="black"
