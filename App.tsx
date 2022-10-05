@@ -1,4 +1,4 @@
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Entypo } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
@@ -35,6 +35,15 @@ export default function App() {
     const loggedInUser = mockUser.find((user) => user.loggedIn === true);
     return loggedInUser
       }
+
+      function checkIfLoggedIn() {
+        const loggedInUser = mockUser.find((user) => user.loggedIn === true);
+        if(loggedInUser?.loggedIn)
+        {
+          alert("You must logg out first!")
+        }
+        return loggedInUser
+        }
 
   return (
     <NavigationContainer>
@@ -77,7 +86,16 @@ export default function App() {
               color="black"
               onPress={() => checkIfLoggedInForFavorite() ? ((navigation.navigate("Favorit", ))) : navigation.navigate("LoggIn")}
             />
-            )})
+            ), 
+            headerLeft: () => (
+              <Entypo
+              name="home"
+              size={30}
+              color="black"
+              onPress={() => checkIfLoggedIn() ?? navigation.navigate("Home")}
+              />
+            )
+            })
           }
         />
         <Stack.Screen
