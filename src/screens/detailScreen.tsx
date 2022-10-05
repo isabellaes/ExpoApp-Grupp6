@@ -25,6 +25,7 @@ import Reanimated, {
 
 
 type Props = NativeStackScreenProps<RootStackParamList, "Details">;
+
 let src = require('../audio/alert.wav');
 
 const ReanimatedPressable = Reanimated.createAnimatedComponent(Pressable);
@@ -59,7 +60,7 @@ export default function DetailScreen({ navigation, route }: Props) {
   }
 
   function nothingChange() {
-    console.log("");
+    return null;
   }
  
   const playSound = React.useCallback(async () => {
