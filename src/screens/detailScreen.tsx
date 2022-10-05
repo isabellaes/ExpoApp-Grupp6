@@ -15,17 +15,26 @@ import { mockUser } from "../interfaces/userInterface";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from 'expo-haptics';
 import { Audio } from 'expo-av';
-import Recipe from "../interfaces/recipeInterface";
+import Reanimated, {
+  useSharedValue,
+  withTiming,
+  useAnimatedStyle,
+  withSequence
+} from 'react-native-reanimated';
+
 
 
 type Props = NativeStackScreenProps<RootStackParamList, "Details">;
 let src = require('../audio/alert.wav');
+
+const ReanimatedPressable = Reanimated.createAnimatedComponent(Pressable);
 
 
 export default function DetailScreen({ navigation, route }: Props) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isEnabled, setIsEnabled] = useState(true);
   const [currentSound, setSound] = useState<Audio.Sound|null>(null);
+  const heartScale = useSharedValue(1);
   const loggedInUser = mockUser.find((user) => user.loggedIn === true);
 
   useEffect(() => {
@@ -65,6 +74,11 @@ export default function DetailScreen({ navigation, route }: Props) {
 
       if(!isFavorite) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        heartScale.value = withTiming(1.3);
+        heartScale.value = withSequence (
+          withTiming(1.3, {duration: 200}),
+          withTiming(1, {duration: 200}),
+        ),
         playSound();
         addRecipe();
       } else{
@@ -78,6 +92,14 @@ export default function DetailScreen({ navigation, route }: Props) {
     currentSound ? () => {currentSound.unloadAsync();} : undefined;
   }, [currentSound]);
 
+
+  const heartStyle = useAnimatedStyle(
+    () => ({
+      transform: [{scale: heartScale.value}],
+      width: 50
+    }),
+    [],
+  )
   
   return (
     <View style={styles.container}>
@@ -90,13 +112,13 @@ export default function DetailScreen({ navigation, route }: Props) {
           />
           
           <Text style={styles.title}>{route.params.recipeName}</Text>
-              <Pressable onPress={loggedInUser? handleToggleFavorite : nothingChange} style={styles.favoriteButton}>
+              <ReanimatedPressable onPress={loggedInUser? handleToggleFavorite : nothingChange} style={heartStyle}>
                 <Ionicons
                 name={isFavorite ? 'heart' : 'heart-outline'}
                 size={35}
                 
                 />
-              </Pressable>
+              </ReanimatedPressable>
           <Text style={styles.protein}>{route.params.protein}</Text>
           <Text style={styles.titledescription}> Description:</Text>
           <Text style={styles.description}>
@@ -173,8 +195,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     height: 50,
     backgroundColor: "#B0C2D4",
-  },
-  favoriteButton: {
-    width: 35
   }
+
 });
