@@ -30,21 +30,17 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
- 
   function checkIfLoggedInForFavorite() {
     const loggedInUser = mockUser.find((user) => user.loggedIn === true);
-    return loggedInUser
-      }
-
-      function checkIfLoggedIn() {
-        const loggedInUser = mockUser.find((user) => user.loggedIn === true);
-        if(loggedInUser?.loggedIn)
-        {
-          alert("You must logg out first!")
-        }
-        return loggedInUser
-        }
-
+    return loggedInUser;
+  }
+  function checkIfLoggedIn() {
+    const loggedInUser = mockUser.find((user) => user.loggedIn === true);
+    if (loggedInUser?.loggedIn) {
+      alert("You must logg out first!");
+    }
+    return loggedInUser;
+  }
   return (
     <NavigationContainer>
       <StatusBar style="dark" />
@@ -77,26 +73,29 @@ export default function App() {
         <Stack.Screen
           name="Recipe"
           component={RecipeScreen}
-            options={({navigation}) => ({
+          options={({ navigation }) => ({
             title: "Recipe",
             headerRight: () => (
               <FontAwesome
-              name="heart"
-              size={25}
-              color="black"
-              onPress={() => checkIfLoggedInForFavorite() ? ((navigation.navigate("Favorit", ))) : navigation.navigate("LoggIn")}
-            />
-            ), 
+                name="heart"
+                size={25}
+                color="black"
+                onPress={() =>
+                  checkIfLoggedInForFavorite()
+                    ? navigation.navigate("Favorit")
+                    : navigation.navigate("LoggIn")
+                }
+              />
+            ),
             headerLeft: () => (
               <Entypo
-              name="home"
-              size={30}
-              color="black"
-              onPress={() => checkIfLoggedIn() ?? navigation.navigate("Home")}
+                name="home"
+                size={30}
+                color="black"
+                onPress={() => checkIfLoggedIn() ?? navigation.navigate("Home")}
               />
-            )
-            })
-          }
+            ),
+          })}
         />
         <Stack.Screen
           name="SignUp"

@@ -2,36 +2,27 @@ import React, { useEffect, useState } from "react";
 import { Button, View, Text, TextInput, StyleSheet, Alert } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
-import { Formik} from "formik";
-import * as Yup from 'yup';
+import { Formik } from "formik";
+import * as Yup from "yup";
 import { mockUser } from "../interfaces/userInterface";
 import Recipe from "../interfaces/recipeInterface";
 import Checkbox from "expo-checkbox";
 
-
-
-
-
-
 type User = {
-  id: number,
-  email: string,
-  password: string,
-  loggedIn: boolean,
-  favoritRecipe: Recipe[],
-}
-
+  id: number;
+  email: string;
+  password: string;
+  loggedIn: boolean;
+  favoritRecipe: Recipe[];
+};
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 
-
 export default function SignUpScreen({ navigation }: Props) {
-
   let id = Math.random();
 
-const [users, setUsers] = useState<User[]>();
-const [isChecked, setChecked] = useState(false);
-
+  const [users, setUsers] = useState<User[]>();
+  const [isChecked, setChecked] = useState(false);
 
   useEffect(() => {
     (() => {
@@ -40,49 +31,59 @@ const [isChecked, setChecked] = useState(false);
   }, []);
 
   const validationSchema = Yup.object({
-  email: Yup.string().email('Invalid email!').notOneOf(mockUser.map((values) => values.email) , 'Email already taken').required('Email is required!'),
-  password: Yup.string()
-    .trim()
-    .min(4, 'Password is too short!').max(10, "Password should not excced 10 chars.")
-    .required('Password is required!'),
-  confirmPassword: Yup.string().required('Confirmation password is required').equals(
-    [Yup.ref('password'), null],
-    'Password does not match!'
-  ),
-});
+    email: Yup.string()
+      .email("Invalid email!")
+      .notOneOf(
+        mockUser.map((values) => values.email),
+        "Email already taken"
+      )
+      .required("Email is required!"),
+    password: Yup.string()
+      .trim()
+      .min(4, "Password is too short!")
+      .max(10, "Password should not excced 10 chars.")
+      .required("Password is required!"),
+    confirmPassword: Yup.string()
+      .required("Confirmation password is required")
+      .equals([Yup.ref("password"), null], "Password does not match!"),
+  });
 
-function checkForOldUsers(values: User){
-const user = users?.find((user) => user.email === values.email);
-if(user)return true
-return false
-}
-function validUserToSignUp(values: User){
-if (!checkForOldUsers(values) && values.email.trim() && values.password.trim()){
-  navigation.navigate('LoggIn')
-  return true;
-}else 
-    return false 
-}
-
-
-function handleFormSubmit(values: User) {
-    if(validUserToSignUp(values) === true)
-    {
-      Alert.alert('Your account has been created!! YEEEEEEEEEEEEEET')
-      mockUser.push(values)
-    }
-    else{
-      return false
-    }
+  function checkForOldUsers(values: User) {
+    const user = users?.find((user) => user.email === values.email);
+    if (user) return true;
+    return false;
+  }
+  function validUserToSignUp(values: User) {
+    if (
+      !checkForOldUsers(values) &&
+      values.email.trim() &&
+      values.password.trim()
+    ) {
+      navigation.navigate("LoggIn");
+      return true;
+    } else return false;
   }
 
-
+  function handleFormSubmit(values: User) {
+    if (validUserToSignUp(values) === true) {
+      Alert.alert("Your account has been created!! YEEEEEEEEEEEEEET");
+      mockUser.push(values);
+    } else {
+      return false;
+    }
+  }
   return (
     <View>
-      
-       <Formik
-      initialValues={{ id , email: '', password: '', confirmPassword: '', loggedIn: false , favoritRecipe: []}}
-       onSubmit={(values) => {
+      <Formik
+        initialValues={{
+          id,
+          email: "",
+          password: "",
+          confirmPassword: "",
+          loggedIn: false,
+          favoritRecipe: [],
+        }}
+        onSubmit={(values) => {
           handleFormSubmit(values);
         }}
         validationSchema={validationSchema}
@@ -97,7 +98,6 @@ function handleFormSubmit(values: User) {
           isValid,
         }) => (
           <View style={styles.formContainer}>
-
             <Text>Email</Text>
             <TextInput
               onChangeText={handleChange("email")}
@@ -139,50 +139,49 @@ function handleFormSubmit(values: User) {
                 {errors.confirmPassword}
               </Text>
             )}
-
             <View style={styles.section}>
-            <Checkbox
-          style={styles.checkbox}
-          value={isChecked}
-          onValueChange={setChecked}
-          color={isChecked ? '#4630EB' : undefined}
-        />
-           <Text>Show Password</Text>
+              <Checkbox
+                style={styles.checkbox}
+                value={isChecked}
+                onValueChange={setChecked}
+                color={isChecked ? "#4630EB" : undefined}
+              />
+              <Text>Show Password</Text>
             </View>
-           
-    
-            <Button disabled={!isValid} onPress={() => { handleSubmit()
-            ,handleFormSubmit(values);
-           }} title="Submit"
+            <Button
+              disabled={!isValid}
+              onPress={() => {
+                handleSubmit(), handleFormSubmit(values);
+              }}
+              title="Submit"
             />
-            
-            <Button  onPress={() => navigation.navigate("Home")} title="Cancel"/>
+            <Button
+              onPress={() => navigation.navigate("Home")}
+              title="Cancel"
+            />
           </View>
         )}
       </Formik>
-
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   formContainer: {
     padding: 50,
   },
-   checkbox: {
+  checkbox: {
     margin: 8,
   },
-   section: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  section: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-
 });
-  
-  const inputStyle = {
-    borderWidth: 1,
-    borderColor: "#4e4e4e",
-    padding: 12,
-    marginBottom: 5,
-  };
+
+const inputStyle = {
+  borderWidth: 1,
+  borderColor: "#4e4e4e",
+  padding: 12,
+  marginBottom: 5,
+};

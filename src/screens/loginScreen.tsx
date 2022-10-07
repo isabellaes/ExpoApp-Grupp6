@@ -3,8 +3,12 @@ import * as ScreenOrientation from "expo-screen-orientation";
 import { Formik } from "formik";
 import React, { useEffect } from "react";
 import {
-  Button, ScrollView, StyleSheet, Text,
-  TextInput, View
+  Button,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import * as yup from "yup";
 import { RootStackParamList } from "../../App";
@@ -12,26 +16,19 @@ import { mockUser } from "../interfaces/userInterface";
 
 type Props = NativeStackScreenProps<RootStackParamList, "LoggIn">;
 
-const styles = StyleSheet.create({
-  formContainer: {
-    padding: 50,
-  },
-});
 interface Values {
   email: string;
   password: string;
 }
 
 export default function LogInScreen({ navigation, route }: Props) {
-
   let loggedInUser = mockUser.find((user) => user.loggedIn === true);
 
-useEffect(() => {
-  (() => {
-    console.log(loggedInUser?.loggedIn);
-    loggedInUser = mockUser.find((user) => user.loggedIn === true);
-  })();
-}, []);
+  useEffect(() => {
+    (() => {
+      loggedInUser = mockUser.find((user) => user.loggedIn === true);
+    })();
+  }, []);
 
   const inputStyle = {
     borderWidth: 1,
@@ -45,13 +42,12 @@ useEffect(() => {
     );
     if (user != undefined) {
       user.loggedIn = true;
-  
+
       return true;
     } else return false;
   }
   function handleFormSubmit(values: Values) {
-    if (validateUser(values)) 
-     navigation.navigate("Recipe");
+    if (validateUser(values)) navigation.navigate("Recipe");
   }
 
   async function changeScreenOrientationLandscape() {
@@ -69,7 +65,7 @@ useEffect(() => {
     <ScrollView>
       <Formik
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values, formikActions) => {
+        onSubmit={(values) => {
           handleFormSubmit(values);
         }}
         validationSchema={yup.object().shape({
@@ -102,7 +98,6 @@ useEffect(() => {
                 {errors.email}
               </Text>
             )}
-
             <TextInput
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
@@ -148,3 +143,9 @@ useEffect(() => {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  formContainer: {
+    padding: 50,
+  },
+});

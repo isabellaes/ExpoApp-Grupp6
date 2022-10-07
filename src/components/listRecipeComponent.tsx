@@ -21,11 +21,6 @@ const styles = StyleSheet.create({
     color: "black",
     margin: 8,
   },
-  container: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-  },
 });
 
 const Item: FC<Recipe> = (props) => {
