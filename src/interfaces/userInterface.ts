@@ -1,4 +1,5 @@
 import Recipe from "./recipeInterface";
+
 export interface User {
   id: number;
   email: string;

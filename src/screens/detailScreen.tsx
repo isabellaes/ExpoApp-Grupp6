@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   View,
   Image,
@@ -6,102 +6,100 @@ import {
   Text,
   Button,
   ScrollView,
-  Pressable
+  Pressable,
 } from "react-native";
 import { RootStackParamList } from "../../App";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Card from "../components/cardComponent";
 import { mockUser } from "../interfaces/userInterface";
 import { Ionicons } from "@expo/vector-icons";
-import * as Haptics from 'expo-haptics';
-import { Audio } from 'expo-av';
+import * as Haptics from "expo-haptics";
+import { Audio } from "expo-av";
 import Reanimated, {
   useSharedValue,
   withTiming,
   useAnimatedStyle,
-  withSequence
-} from 'react-native-reanimated';
-
-
+  withSequence,
+} from "react-native-reanimated";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Details">;
 
-let src = require('../audio/alert.wav');
+let src = require("../../assets/audio/alert.wav");
 
 const ReanimatedPressable = Reanimated.createAnimatedComponent(Pressable);
 
-
 export default function DetailScreen({ navigation, route }: Props) {
   const [isFavorite, setIsFavorite] = useState(false);
-  const [isEnabled, setIsEnabled] = useState(true);
-  const [currentSound, setSound] = useState<Audio.Sound|null>(null);
+  const [currentSound, setSound] = useState<Audio.Sound | null>(null);
   const heartScale = useSharedValue(1);
   const loggedInUser = mockUser.find((user) => user.loggedIn === true);
 
   useEffect(() => {
-    loggedInUser?.favoritRecipe.forEach(element => {
-      if (element.id === route.params.id)
-        setIsFavorite(true);
+    loggedInUser?.favoritRecipe.forEach((element) => {
+      if (element.id === route.params.id) setIsFavorite(true);
     });
   });
+
   function addRecipe() {
-   const a = loggedInUser?.favoritRecipe.find(item => item.recipeName === route.params.recipeName);
-   if(!a){
-    loggedInUser?.favoritRecipe.push(route.params);
+    const a = loggedInUser?.favoritRecipe.find(
+      (item) => item.recipeName === route.params.recipeName
+    );
+    if (!a) {
+      loggedInUser?.favoritRecipe.push(route.params);
     }
   }
+
   function removeRecipe() {
     const index = loggedInUser?.favoritRecipe.indexOf(route.params, 0) ?? -1;
-    console.log(index);
-    if(index > -1) {
+    if (index > -1) {
       return loggedInUser?.favoritRecipe.splice(index, 1);
     }
-    
   }
 
   function nothingChange() {
     return null;
   }
- 
+
   const playSound = React.useCallback(async () => {
     const { sound } = await Audio.Sound.createAsync(src);
     setSound(sound);
     await sound.playAsync();
   }, []);
-  
+
   const handleToggleFavorite = useCallback(async () => {
-    
-     setIsFavorite(val => !val);
+    setIsFavorite((val) => !val);
 
-      if(!isFavorite) {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-        heartScale.value = withTiming(1.3);
-        heartScale.value = withSequence (
-          withTiming(1.3, {duration: 200}),
-          withTiming(1, {duration: 200}),
-        ),
+    if (!isFavorite) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      heartScale.value = withTiming(1.3);
+      (heartScale.value = withSequence(
+        withTiming(1.3, { duration: 200 }),
+        withTiming(1, { duration: 200 })
+      )),
         playSound();
-        addRecipe();
-      } else{
-        removeRecipe();
-        playSound();
-
-      }  
+      addRecipe();
+    } else {
+      removeRecipe();
+      playSound();
+    }
   }, [removeRecipe, addRecipe, isFavorite, playSound]);
 
   useEffect(() => {
-    currentSound ? () => {currentSound.unloadAsync();} : undefined;
+    currentSound
+      ? () => {
+          currentSound.unloadAsync();
+        }
+      : undefined;
   }, [currentSound]);
-
 
   const heartStyle = useAnimatedStyle(
     () => ({
-      transform: [{scale: heartScale.value}],
-      width: 50
+      transform: [{ scale: heartScale.value }],
+      width: 50,
     }),
-    [],
-  )
-  
+    []
+  );
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -111,15 +109,13 @@ export default function DetailScreen({ navigation, route }: Props) {
             style={styles.image}
             source={{ uri: route.params.recipeImage }}
           />
-          
           <Text style={styles.title}>{route.params.recipeName}</Text>
-              <ReanimatedPressable onPress={loggedInUser? handleToggleFavorite : nothingChange} style={heartStyle}>
-                <Ionicons
-                name={isFavorite ? 'heart' : 'heart-outline'}
-                size={35}
-                
-                />
-              </ReanimatedPressable>
+          <ReanimatedPressable
+            onPress={loggedInUser ? handleToggleFavorite : nothingChange}
+            style={heartStyle}
+          >
+            <Ionicons name={isFavorite ? "heart" : "heart-outline"} size={35} />
+          </ReanimatedPressable>
           <Text style={styles.protein}>{route.params.protein}</Text>
           <Text style={styles.titledescription}> Description:</Text>
           <Text style={styles.description}>
@@ -131,11 +127,14 @@ export default function DetailScreen({ navigation, route }: Props) {
           </Text>
         </Card>
       </ScrollView>
-
       <View style={styles.buttons}>
         <Button
           title="Go to favorits"
-          onPress={() => loggedInUser ? navigation.navigate("Favorit") : navigation.navigate("LoggIn")}
+          onPress={() =>
+            loggedInUser
+              ? navigation.navigate("Favorit")
+              : navigation.navigate("LoggIn")
+          }
         />
       </View>
     </View>
@@ -158,7 +157,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     color: "black",
-
     marginLeft: 5,
   },
   protein: {
@@ -196,6 +194,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     height: 50,
     backgroundColor: "#B0C2D4",
-  }
-
+  },
 });

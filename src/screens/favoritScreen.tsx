@@ -1,9 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import * as Speech from "expo-speech";
 import React from "react";
-import {
-  Button, ScrollView, StyleSheet, Text, View
-} from "react-native";
+import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../../App";
 import Card from "../components/cardComponent";
 import Item from "../components/listRecipeComponent";
@@ -11,7 +9,7 @@ import { mockUser } from "../interfaces/userInterface";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Favorit">;
 
-export default function FavoritScreen({ navigation, route }: Props) {
+export default function FavoritScreen({ navigation }: Props) {
   const speak = () => {
     const thingToSay = "Haj, and welcome to your side";
     Speech.speak(thingToSay);
@@ -27,7 +25,7 @@ export default function FavoritScreen({ navigation, route }: Props) {
           {loggedInUser?.favoritRecipe.map((item) => (
             <View key={item.id} style={styles.containerInfo}>
               <Text onPress={() => navigation.navigate("Details", item)}>
-                <Item 
+                <Item
                   id={item.id}
                   recipeName={item.recipeName}
                   recipeImage={item.recipeImage}

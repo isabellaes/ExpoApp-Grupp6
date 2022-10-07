@@ -20,7 +20,8 @@ speech
 SplashScreen
 StatusBar
 Av
-vectorIcons
+Font
+CheckBox
 
 Components from react Native that have been used:
 View
@@ -31,8 +32,14 @@ Button
 ScrollView
 Pressable
 TextInput
+Alert
+Dimensions
+Reanimated
 
-"formik": "^2.2.9", We have even used Formik
+Navigation
+NativeStackScreenProps
+
+We have even used Formik and Yup
 
 [X] 2. Git & GitHub have been used = yes
 [X] 3. The project folder contains a README.md file = yes
