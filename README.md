@@ -42,19 +42,24 @@ NativeStackScreenProps
 We have even used Formik and Yup
 
 [X] 2. Git & GitHub have been used = yes
+
 [X] 3. The project folder contains a README.md file = yes
+
 [X] 4. The task is submitted on time! = yes submitted date -2022-10-07-
+
 [X] 5. Oral presentation is completed = yes
 
 Requirements for successfully passed:
 
 [X] 1. All points for approved are met = yes
+
 [X] 2. React Navigation is used to create a better experience in the app. = yes  
  "react-navigation": "^4.4.4",
 "@react-navigation/native": "^6.0.13",
 "@react-navigation/native-stack": "^6.9.0",
 
 [X] 3. Another optional external module is used in the project. = yes
+
 [X] 4. Application prototypes are developed before it is implemented. Pictures of the prototype
 must be in the project upon submission. = Yes you can find it under assets/prototyes
 
